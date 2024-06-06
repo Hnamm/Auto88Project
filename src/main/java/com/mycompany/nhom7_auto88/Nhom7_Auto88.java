@@ -4,6 +4,8 @@
 
 package com.mycompany.nhom7_auto88;
 
+import Views.DangKiForm;
+
 /**
  *
  * @author admin
@@ -11,6 +13,7 @@ package com.mycompany.nhom7_auto88;
 public class Nhom7_Auto88 {
 
     public static void main(String[] args) {
-        
+        DangKiForm jf= new DangKiForm();
+        jf.setVisible(true);
     }
 }

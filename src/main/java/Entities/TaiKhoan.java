@@ -4,12 +4,16 @@
  */
 package Entities;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  *
  * @author admin
  */
-public class TaiKhoan {
-    private int id;
+public class TaiKhoan implements Serializable{
+    private static int taoId = 0;
+    private int id = 0;
     private String username;
     private String password;
 
@@ -17,22 +21,35 @@ public class TaiKhoan {
     }
 
     public TaiKhoan(String username, String password) {
+        this.id += taoId;
         this.username = username;
         this.password = password;
     }
 
-    public TaiKhoan(int id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.username);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TaiKhoan other = (TaiKhoan) obj;
+        return Objects.equals(this.username, other.username);
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -50,6 +67,4 @@ public class TaiKhoan {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    
 }
