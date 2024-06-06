@@ -4,7 +4,7 @@
 
 package com.mycompany.nhom7_auto88;
 
-import Views.DangKiForm;
+import Views.DangNhapForm;
 
 /**
  *
@@ -13,7 +13,7 @@ import Views.DangKiForm;
 public class Nhom7_Auto88 {
 
     public static void main(String[] args) {
-        DangKiForm jf= new DangKiForm();
-        jf.setVisible(true);
+        DangNhapForm dangNhapForm = new DangNhapForm();
+        
     }
 }

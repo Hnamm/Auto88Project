@@ -4,6 +4,14 @@
  */
 package Views;
 
+import Entities.TaiKhoan;
+import Models.TaiKhoanModel;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author admin
@@ -15,6 +23,9 @@ public class DangNhapForm extends javax.swing.JFrame {
      */
     public DangNhapForm() {
         initComponents();
+        this.setTitle("Đăng Nhập Form");
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -33,7 +44,6 @@ public class DangNhapForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtTenDangNhap = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JPasswordField();
-        chkRememberMe = new javax.swing.JCheckBox();
         btnDangNhap = new javax.swing.JButton();
         btnDangKy = new javax.swing.JButton();
 
@@ -57,12 +67,15 @@ public class DangNhapForm extends javax.swing.JFrame {
             }
         });
 
-        chkRememberMe.setText("Remeber me");
-
         btnDangNhap.setBackground(new java.awt.Color(153, 204, 255));
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnDangNhap.setText("Đăng Nhập");
         btnDangNhap.setBorder(null);
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
 
         btnDangKy.setBackground(new java.awt.Color(204, 255, 204));
         btnDangKy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -85,7 +98,6 @@ public class DangNhapForm extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(chkRememberMe)
                             .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,13 +132,11 @@ public class DangNhapForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(chkRememberMe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,10 +148,42 @@ public class DangNhapForm extends javax.swing.JFrame {
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here:
-        DangKiForm form = new DangKiForm();
+        DangKiForm dangKiForm = new DangKiForm();
         this.dispose();
-        form.setVisible(true);
+        dangKiForm.setVisible(true);
     }//GEN-LAST:event_btnDangKyActionPerformed
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        try {
+            // TODO add your handling code here:
+            HashSet<TaiKhoan> dstk = TaiKhoanModel.readFromFile();
+            String username = txtTenDangNhap.getText().trim();
+            char[] password = txtMatKhau.getPassword();
+            String passwordString = (new String(password)).trim();
+            
+            if(username.equals("")) {
+                JOptionPane.showMessageDialog(this, "Không được bỏ trống tên đăng nhập");
+                return;
+            }
+            if(passwordString.equals("")) {
+                JOptionPane.showMessageDialog(this, "Không được bỏ trống mật khẩu");
+                return;
+            }
+            
+            TaiKhoan taiKhoanMoi = new TaiKhoan(username, passwordString);
+            if(dstk.contains(taiKhoanMoi)) {
+                TrangChuForm form = new TrangChuForm();
+                this.dispose();
+                form.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng"); 
+                txtTenDangNhap.setText("");
+                txtMatKhau.setText("");
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(DangNhapForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,17 +213,14 @@ public class DangNhapForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DangNhapForm().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DangNhapForm().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangKy;
     private javax.swing.JButton btnDangNhap;
-    private javax.swing.JCheckBox chkRememberMe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

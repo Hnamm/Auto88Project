@@ -28,8 +28,10 @@ public class TaiKhoan implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.username);
+        int hash = 3;
+        hash = 31 * hash + this.id;
+        hash = 31 * hash + Objects.hashCode(this.username);
+        hash = 31 * hash + Objects.hashCode(this.password);
         return hash;
     }
 
@@ -45,8 +47,16 @@ public class TaiKhoan implements Serializable{
             return false;
         }
         final TaiKhoan other = (TaiKhoan) obj;
-        return Objects.equals(this.username, other.username);
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return Objects.equals(this.password, other.password);
     }
+
+    
 
     public int getId() {
         return id;

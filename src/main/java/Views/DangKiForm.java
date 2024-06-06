@@ -29,6 +29,8 @@ public class DangKiForm extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Đăng ký Form");
         
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -197,19 +199,22 @@ public class DangKiForm extends javax.swing.JFrame {
                 return;
             }
             TaiKhoan taiKhoanMoi = new TaiKhoan(username, passwordString);
-            if(dstk.contains(taiKhoanMoi)) {                
-                JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
-                txtTenTaiKhoan.setText("");
-                txtMatKhau.setText("");
-                txtXacNhanMatKhau.setText("");
-            } else {
-                dstk.add(taiKhoanMoi);
-                JOptionPane.showMessageDialog(this, "Đăng ký thành công");
-                txtTenTaiKhoan.setText("");
-                txtMatKhau.setText("");
-                txtXacNhanMatKhau.setText("");
-                TaiKhoanModel.writeToFile(dstk);
+            for(TaiKhoan x : dstk) {
+                if(x.getUsername().equals(username)) {                
+                    JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
+                    txtTenTaiKhoan.setText("");
+                    txtMatKhau.setText("");
+                    txtXacNhanMatKhau.setText("");
+                    return;
+                }             
             }
+            dstk.add(taiKhoanMoi);
+            JOptionPane.showMessageDialog(this, "Đăng ký thành công");
+            txtTenTaiKhoan.setText("");
+            txtMatKhau.setText("");
+            txtXacNhanMatKhau.setText("");
+            TaiKhoanModel.writeToFile(dstk);
+            
         } catch (IOException ex) {
             Logger.getLogger(DangKiForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -262,10 +267,8 @@ public class DangKiForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DangKiForm().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DangKiForm().setVisible(true);
         });
     }
 
