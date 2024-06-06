@@ -15,6 +15,9 @@ public class QuanLyXeForm extends javax.swing.JFrame {
      */
     public QuanLyXeForm() {
         initComponents();
+        this.setTitle("Quản lý xe Form");
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

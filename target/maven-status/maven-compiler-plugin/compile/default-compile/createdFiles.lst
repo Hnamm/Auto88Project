@@ -3,6 +3,7 @@ Views\DangNhapForm.class
 Views\QuanLyHoaDonForm$1.class
 Views\QuanLyNhanVienForm.class
 Entities\TaiKhoan.class
+Views\TrangChuForm$5.class
 Views\DangNhapForm$2.class
 Views\TrangChuForm$1.class
 Views\DangKiForm$2.class
@@ -14,7 +15,9 @@ Models\XeModel.class
 Views\QuanLyXeForm.class
 Views\QuanLyKhachHangForm$1.class
 Models\HoaDonModel.class
+Views\TrangChuForm$4.class
 Views\DangNhapForm$3.class
+Views\TrangChuForm$2.class
 Views\DangNhapForm$1.class
 Views\QuanLyNhanVienForm$1.class
 Views\QuanLyHoaDonForm.class
@@ -26,3 +29,4 @@ com\mycompany\nhom7_auto88\Nhom7_Auto88.class
 Entities\Xe.class
 Views\QuanLyKhachHangForm.class
 Views\DangKiForm$1.class
+Views\TrangChuForm$3.class

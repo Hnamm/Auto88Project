@@ -173,7 +173,7 @@ public class DangNhapForm extends javax.swing.JFrame {
             TaiKhoan taiKhoanMoi = new TaiKhoan(username, passwordString);
             if(dstk.contains(taiKhoanMoi)) {
                 TrangChuForm form = new TrangChuForm();
-                this.dispose();
+                this.dispose();               
                 form.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng"); 

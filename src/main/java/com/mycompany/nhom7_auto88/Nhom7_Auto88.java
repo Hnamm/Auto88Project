@@ -12,8 +12,7 @@ import Views.DangNhapForm;
  */
 public class Nhom7_Auto88 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {       
         DangNhapForm dangNhapForm = new DangNhapForm();
-        
     }
 }
