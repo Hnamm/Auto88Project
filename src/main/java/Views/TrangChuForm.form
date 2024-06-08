@@ -3,18 +3,8 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-<<<<<<< HEAD
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <SerializedValue value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-68,0,0,4,-80"/>
-=======
-<<<<<<< HEAD
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1200, 700]"/>
-=======
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-      <SerializedValue value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-68,0,0,4,-80"/>
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -43,21 +33,16 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Component id="jPanel3" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
           </Group>
           <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
       </Group>
@@ -95,6 +80,7 @@
                               <Component id="btnQuanLyKhachHang" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnQuanLyNhanVien" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnQuanLyHoaDon" max="32767" attributes="0"/>
+                              <Component id="btnQuanLyTaiKhoan" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -126,19 +112,9 @@
                   <Component id="btnQuanLyNhanVien" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btnQuanLyKhachHang" min="-2" pref="40" max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="btnQuanLyTaiKhoan" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace pref="109" max="32767" attributes="0"/>
-=======
-<<<<<<< HEAD
-                  <EmptySpace max="32767" attributes="0"/>
-=======
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="btnQuanLyTaiKhoan" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
                   <Component id="btnDangXuat" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -198,6 +174,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuanLyKhachHangActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="btnQuanLyTaiKhoan">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; t&#xe0;i kho&#x1ea3;n"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JButton" name="btnDangXuat">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -232,42 +216,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
-=======
-<<<<<<< HEAD
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="680" max="-2" attributes="0"/>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
-=======
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
-=======
-<<<<<<< HEAD
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
-=======
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
               </Group>
           </Group>
         </DimensionLayout>
@@ -278,15 +238,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="36" style="1"/>
             </Property>
-<<<<<<< HEAD
             <Property name="text" type="java.lang.String" value="Nh&#x1eef;ng chi&#x1ebf;c xe &#x111;&#x1b0;&#x1ee3;c nh&#x1ead;p v&#x1ec1; m&#x1edb;i nh&#x1ea5;t "/>
-=======
-<<<<<<< HEAD
-            <Property name="text" type="java.lang.String" value="Nh&#x1eef;ng chi&#x1ebf;c xe &#x111;&#x1b0;&#x1ee3;c nh&#x1ead;p v&#x1ec1; m&#x1edb;i nh&#x1ea5;t"/>
-=======
-            <Property name="text" type="java.lang.String" value="Nh&#x1eef;ng chi&#x1ebf;c xe &#x111;&#x1b0;&#x1ee3;c nh&#x1ead;p v&#x1ec1; m&#x1edb;i nh&#x1ea5;t "/>
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
           </Properties>
         </Component>
       </SubComponents>
@@ -296,46 +248,20 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-=======
-<<<<<<< HEAD
-              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-=======
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-              <Component id="jScrollPane2" min="-2" pref="495" max="-2" attributes="0"/>
-=======
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="535" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
               </Group>
-<<<<<<< HEAD
-=======
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-<<<<<<< HEAD
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-=======
-<<<<<<< HEAD
-        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-=======
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
->>>>>>> tuan
->>>>>>> cf9bb194bd3a6c1d1a704c5341e9f928216eba21
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
