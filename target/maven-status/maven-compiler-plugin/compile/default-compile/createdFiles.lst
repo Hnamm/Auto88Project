@@ -22,6 +22,7 @@ Views\DangNhapForm$1.class
 Views\QuanLyNhanVienForm$1.class
 Views\QuanLyHoaDonForm.class
 Views\DangKiForm.class
+Views\TrangChuForm$6.class
 Models\NhanVienModel.class
 Views\QuanLyXeForm$1.class
 Views\TrangChuForm.class
