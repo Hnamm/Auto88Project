@@ -94,6 +94,8 @@ public class QuanLyXeForm extends javax.swing.JFrame {
         mauSacComboBox = new javax.swing.JComboBox<>();
         soGheComboBox = new javax.swing.JComboBox<>();
         loaiXeComboBox = new javax.swing.JComboBox<>();
+        resetButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,11 +218,12 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                         .addComponent(maXeSearchLabel)
                         .addComponent(maXeSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(them_btn)
-                    .addComponent(sua_btn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(xoa_btn)
-                    .addComponent(sapXep_btn))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(them_btn)
+                        .addComponent(sua_btn)
+                        .addComponent(sapXep_btn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -272,14 +275,18 @@ public class QuanLyXeForm extends javax.swing.JFrame {
         loaiXeComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loaiXeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xe điện", "Xe xăng", "Xe dầu" }));
 
+        resetButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addComponent(thongTinXeLabel)
-                .addGap(111, 111, 111))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -299,9 +306,18 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                     .addComponent(giaBanTextField)
                     .addComponent(ngaySanXuatTextField)
                     .addComponent(mauSacComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(loaiXeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loaiXeComboBox, 0, 166, Short.MAX_VALUE)
                     .addComponent(soGheComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(thongTinXeLabel)
+                        .addGap(111, 111, 111))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(resetButton)
+                        .addGap(120, 120, 120))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,21 +356,31 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soGheLabel)
                     .addComponent(soGheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(resetButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        backButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        backButton.setText("Trở lại ");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(412, 412, 412)
+                        .addComponent(backButton)
+                        .addGap(331, 331, 331)
                         .addComponent(quanLyThongTinXeLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -362,8 +388,13 @@ public class QuanLyXeForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(quanLyThongTinXeLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(quanLyThongTinXeLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backButton)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -407,10 +438,10 @@ public class QuanLyXeForm extends javax.swing.JFrame {
    
     private void sua_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sua_btnActionPerformed
         try {
-            if (maXeSearchTextField.getText().isEmpty()) {
+            if (maXeTextField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập mã xe để tìm kiếm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                String maXeSearch = maXeSearchTextField.getText();
+                String maXeSearch = maXeTextField.getText();
                 Xe xe = timKiemXe(maXeSearch);
                 if (xe != null) {
                     maXeTextField.setEnabled(false);
@@ -439,8 +470,9 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                         danhSachXeTable.getModel().setValueAt(loaiXe, rowIndex, 6);
                         danhSachXeTable.getModel().setValueAt(soGhe, rowIndex, 7);
                     }
+                    LuuFile(fileName, danhSachXe);
                     JOptionPane.showMessageDialog(rootPane, "Đã cập nhật thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
+                    
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Không tìm thấy mã xe", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -468,7 +500,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                     layThongTinXe(newXe);
                     // Thêm xe mới vào danh sách
                     danhSachXe.add(newXe); // giả sử bạn có danh sách chứa các xe
-
+                    
                     JOptionPane.showMessageDialog(rootPane, "Thêm xe thành công", "Thông báo", HEIGHT);
                     // Lưu danh sách vào file hoặc cập nhật hiển thị nếu cần
                     LuuFile(fileName, danhSachXe); // giả sử bạn có hàm lưu file
@@ -496,7 +528,9 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                         DefaultTableModel model = (DefaultTableModel) danhSachXeTable.getModel();
                         model.removeRow(rowIndex);
                     }
-                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thông báo", HEIGHT);            
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thông báo", HEIGHT);   
+                    
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Không tìm thấy xe để xóa", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 }
@@ -528,7 +562,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Không tìm thấy mã xe", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     tenXeTextField.setText("");
                     maXeTextField.setText("");
-                    hangSanXuatLabel.setText("");
+                    hangSanXuatTextField.setText("");
                     giaBanTextField.setText("");
                     ngaySanXuatTextField.setText("");
                     mauSacComboBox.setSelectedItem("");
@@ -571,6 +605,24 @@ public class QuanLyXeForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi sắp xếp: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_sapXep_btnActionPerformed
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        tenXeTextField.setText("");
+        maXeTextField.setText("");
+        hangSanXuatTextField.setText("");
+        giaBanTextField.setText("");
+        ngaySanXuatTextField.setText("");
+        mauSacComboBox.setSelectedItem("");
+        loaiXeComboBox.setSelectedItem("");
+        soGheComboBox.setSelectedItem("");
+    }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+        // Mở JFrame của trang chủ
+        TrangChuForm trangChu = new TrangChuForm();
+        trangChu.setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
     //luu File vào tệp 
     public void LuuFile(String fileName, ArrayList<Xe> danhSachXe){
         //Tạo luồng ghi file 
@@ -700,6 +752,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel danhSachXeLabel;
     private javax.swing.JTable danhSachXeTable;
     private javax.swing.JLabel giaBanLabel;
@@ -720,6 +773,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
     private javax.swing.JLabel ngaySanXuatLabel;
     private javax.swing.JTextField ngaySanXuatTextField;
     private javax.swing.JLabel quanLyThongTinXeLabel;
+    private javax.swing.JButton resetButton;
     private javax.swing.JButton sapXep_btn;
     private javax.swing.JComboBox<String> soGheComboBox;
     private javax.swing.JLabel soGheLabel;

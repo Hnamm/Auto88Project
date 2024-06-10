@@ -1,6 +1,7 @@
 Models\TaiKhoanModel.class
 Views\DangNhapForm.class
 Views\QuanLyHoaDonForm$1.class
+Views\QuanLyXeForm$9.class
 Views\QuanLyNhanVienForm.class
 Entities\TaiKhoan.class
 Views\QuanLyXeForm$4.class
@@ -19,6 +20,7 @@ Models\HoaDonModel.class
 Views\QuanLyXeForm$5.class
 Views\DangNhapForm$1.class
 Views\QuanLyNhanVienForm$1.class
+Views\QuanLyXeForm$8.class
 Views\QuanLyHoaDonForm.class
 Views\DangKiForm.class
 Models\NhanVienModel.class
