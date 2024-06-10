@@ -12,4 +12,11 @@
         <exec.mainClass>com.mycompany.nhom7_auto88.Nhom7_Auto88</exec.mainClass>
     </properties>
     <name>Nhom7_Auto88</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE210</version>
+        </dependency>
+    </dependencies>
 </project>
