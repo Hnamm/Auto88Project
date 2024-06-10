@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models;
+
 import java.util.ArrayList;
 import Entities.HoaDon;
 import java.io.FileInputStream;
@@ -15,15 +16,16 @@ import static java.nio.file.Files.list;
 import java.util.Calendar;
 import static java.util.Collections.list;
 import java.util.Date;
+
 /**
  *
  * @author admin
  */
 public class HoaDonModel {
-     private ArrayList<HoaDon> dshd;
+    private ArrayList<HoaDon> dshd;
 
     public HoaDonModel() {
-        dshd=new ArrayList<>();
+        dshd = new ArrayList<>();
     }
 
     public ArrayList<HoaDon> getDshd() {
@@ -33,36 +35,40 @@ public class HoaDonModel {
     public void setDshd(ArrayList<HoaDon> dshd) {
         this.dshd = dshd;
     }
-     public int add(HoaDon hd){
-         dshd.add(hd);
-         return 1;
-     }
-     public HoaDon find(String mahd){
-         for (HoaDon hoaDon : dshd) {
-             if(hoaDon.getMaHoaDon().equals(mahd)){
-                 return hoaDon;
-             }
-         }
-         return null;
-     }
-     public int update(HoaDon hd){
+
+    public int add(HoaDon hd) {
+        dshd.add(hd);
+        return 1;
+    }
+
+    public HoaDon find(String mahd) {
+        for (HoaDon hoaDon : dshd) {
+            if (hoaDon.getMaHoaDon().equals(mahd)) {
+                return hoaDon;
+            }
+        }
+        return null;
+    }
+
+    public int update(HoaDon hd) {
         HoaDon oldHoaDon = find(hd.getMaHoaDon());
         if (oldHoaDon != null) {
             dshd.remove(oldHoaDon);
             dshd.add(hd);
-         
+
         }
         return 1;
-     }
-     public int remove(String mahd){
-         HoaDon hd =find(mahd);
-         if( hd !=null){
-             dshd.remove(hd);
-         }
-         return 1;
-     }
-     
-     public void fakeData() {
+    }
+
+    public int remove(String mahd) {
+        HoaDon hd = find(mahd);
+        if (hd != null) {
+            dshd.remove(hd);
+        }
+        return 1;
+    }
+
+    public void fakeData() {
         dshd.add(new HoaDon("HD001", createDate(2023, 1, 1), "KH001", "XE001", 1, 20000, "NV001", "offline"));
         dshd.add(new HoaDon("HD002", createDate(2023, 2, 15), "KH002", "XE002", 2, 30000, "NV002", "offline"));
         dshd.add(new HoaDon("HD003", createDate(2023, 3, 20), "KH003", "XE003", 1, 25000, "NV003", "offline"));
@@ -74,6 +80,7 @@ public class HoaDonModel {
         cal.set(year, month - 1, day); // Tháng trong Calendar bắt đầu từ 0
         return cal.getTime();
     }
+
     public ArrayList<HoaDon> docfile(String filename) {
         ArrayList<HoaDon> list = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
@@ -87,9 +94,10 @@ public class HoaDonModel {
         }
         return list;
     }
+
     public void LuuFile(String fileName, ArrayList<HoaDon> list) {
         try (FileOutputStream fos = new FileOutputStream(fileName);
-             ObjectOutputStream objOutputStream = new ObjectOutputStream(fos)) {
+                ObjectOutputStream objOutputStream = new ObjectOutputStream(fos)) {
             objOutputStream.writeObject(list);
             objOutputStream.flush();
             System.out.println("Lưu file thành công");

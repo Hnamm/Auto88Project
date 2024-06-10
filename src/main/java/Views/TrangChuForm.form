@@ -4,12 +4,17 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <SerializedValue value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-68,0,0,4,-80"/>
 =======
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1200, 800]"/>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <SerializedValue value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-68,0,0,4,-80"/>
+>>>>>>> master
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -45,18 +50,25 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           <Component id="jPanel1" max="32767" attributes="0"/>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+>>>>>>> master
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
           </Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
 =======
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+          <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+>>>>>>> master
       </Group>
     </DimensionLayout>
   </Layout>
@@ -93,9 +105,12 @@
                               <Component id="btnQuanLyNhanVien" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnQuanLyHoaDon" max="32767" attributes="0"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                               <Component id="btnQuanLyTaiKhoan" alignment="1" max="32767" attributes="0"/>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+>>>>>>> master
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -128,12 +143,16 @@
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btnQuanLyKhachHang" min="-2" pref="40" max="-2" attributes="0"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <EmptySpace pref="180" max="32767" attributes="0"/>
 =======
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="btnQuanLyTaiKhoan" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+                  <EmptySpace pref="180" max="32767" attributes="0"/>
+>>>>>>> master
                   <Component id="btnDangXuat" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -194,6 +213,7 @@
           </Events>
         </Component>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <Component class="javax.swing.JButton" name="btnQuanLyTaiKhoan">
           <Properties>
@@ -204,6 +224,8 @@
           </Properties>
         </Component>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+>>>>>>> master
         <Component class="javax.swing.JButton" name="btnDangXuat">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -220,11 +242,17 @@
             </Property>
           </Properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDangXuatActionPerformed"/>
           </Events>
 =======
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDangXuatActionPerformed"/>
+          </Events>
+>>>>>>> master
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
           <Properties>
@@ -241,19 +269,28 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
+<<<<<<< HEAD
 =======
               <EmptySpace min="0" pref="721" max="32767" attributes="0"/>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+>>>>>>> master
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -272,12 +309,15 @@
           </Properties>
         </Component>
       </SubComponents>
+<<<<<<< HEAD
 =======
               <EmptySpace min="0" pref="56" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+>>>>>>> master
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel3">
 
@@ -285,15 +325,22 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
 =======
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
 >>>>>>> 6339993884e797aedd23ce14a240f5805f3111c8
+=======
+              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+>>>>>>> master
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="535" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
@@ -351,6 +398,7 @@
           </SubComponents>
         </Container>
       </SubComponents>
+<<<<<<< HEAD
 =======
               <EmptySpace min="0" pref="561" max="32767" attributes="0"/>
           </Group>
@@ -360,3 +408,8 @@
     </Container>
   </SubComponents>
 </Form>
+=======
+    </Container>
+  </SubComponents>
+</Form>
+>>>>>>> master

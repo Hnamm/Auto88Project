@@ -146,9 +146,12 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTenTaiKhoan">
+<<<<<<< HEAD
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTenTaiKhoanActionPerformed"/>
           </Events>
+=======
+>>>>>>> master
         </Component>
         <Component class="javax.swing.JButton" name="btnDangKy">
           <Properties>
@@ -195,6 +198,7 @@
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtMatKhau">
+<<<<<<< HEAD
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMatKhauActionPerformed"/>
           </Events>
@@ -203,6 +207,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtXacNhanMatKhauActionPerformed"/>
           </Events>
+=======
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtXacNhanMatKhau">
+>>>>>>> master
         </Component>
       </SubComponents>
     </Container>

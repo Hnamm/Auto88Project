@@ -26,7 +26,8 @@ public class KhachHangModel {
 
     private KhachHangModel() {
         khachHangs = new LinkedHashSet<KhachHang>();
-        Set<KhachHang> loadedKhachHangs = (Set<KhachHang>) KhachHangModel.readDateFromFile("src/main/java/files/KhachHang.txt");
+        Set<KhachHang> loadedKhachHangs = (Set<KhachHang>) KhachHangModel
+                .readDateFromFile("src/main/java/files/KhachHang.txt");
 
         if (loadedKhachHangs != null) {
             khachHangs.addAll(loadedKhachHangs);
@@ -40,7 +41,6 @@ public class KhachHangModel {
         return instance;
     }
 
-
     public Set<KhachHang> getKhachHangs() {
         return khachHangs;
     }
@@ -53,7 +53,6 @@ public class KhachHangModel {
         khachHangs.add(newCustomer);
     }
 
-
     public KhachHang getCustomerById(String id) {
         return khachHangs.stream()
                 .filter(c -> c.getMaKhachHang().equals(id))
@@ -65,9 +64,9 @@ public class KhachHangModel {
         khachHangs.removeIf(c -> c.getMaKhachHang().equals(customerId));
     }
 
-
     public void updateCustomer(KhachHang updatedCustomer) {
-        Optional<KhachHang> customerOtp = khachHangs.stream().filter(c -> c.getMaKhachHang().equals(updatedCustomer.getMaKhachHang())).findFirst();
+        Optional<KhachHang> customerOtp = khachHangs.stream()
+                .filter(c -> c.getMaKhachHang().equals(updatedCustomer.getMaKhachHang())).findFirst();
         customerOtp.ifPresent(customer -> {
             customer.setTenKhachHang(updatedCustomer.getTenKhachHang());
             customer.setSoDienThoai(updatedCustomer.getSoDienThoai());
@@ -77,20 +76,20 @@ public class KhachHangModel {
         });
     }
 
-
     public Set<KhachHang> searchCustomers(String keyword) {
         return (Set<KhachHang>) khachHangs.stream()
                 .filter(c -> c.getTenKhachHang().toLowerCase().contains(keyword.toLowerCase())
-                || c.getDiaChi().toLowerCase().contains(keyword.toLowerCase())
-                || c.getSoDienThoai().contains(keyword)
-                || c.getMaKhachHang().contains(keyword)).collect(Collectors.toSet());
+                        || c.getDiaChi().toLowerCase().contains(keyword.toLowerCase())
+                        || c.getSoDienThoai().contains(keyword)
+                        || c.getMaKhachHang().contains(keyword))
+                .collect(Collectors.toSet());
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
         String regex = "0\\d{9}";
         return phoneNumber.matches(regex);
     }
-    
+
     public static void writeDataToFile(Set<KhachHang> data, String fileName) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);

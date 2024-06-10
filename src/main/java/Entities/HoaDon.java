@@ -10,12 +10,11 @@ import Entities.HoaDon;
 import Models.HoaDonModel;
 import java.io.Serializable;
 
-
 /**
  *
  * @author admin
  */
-public class HoaDon implements Serializable{
+public class HoaDon implements Serializable {
     private String maHoaDon;
     private Date ngayNhap;
     private String maKhachHang;
@@ -24,14 +23,16 @@ public class HoaDon implements Serializable{
     private int donGia;
     private String maNV;
     private String pttt;
-    
-    public int ThanhTien(){
-        return soLuong*donGia; 
+
+    public int ThanhTien() {
+        return soLuong * donGia;
     }
+
     public HoaDon() {
     }
 
-    public HoaDon(String maHoaDon, Date ngayNhap, String maKhachHang, String maXe, int soLuong, int donGia, String maNV, String pttt) {
+    public HoaDon(String maHoaDon, Date ngayNhap, String maKhachHang, String maXe, int soLuong, int donGia, String maNV,
+            String pttt) {
         this.maHoaDon = maHoaDon;
         this.ngayNhap = ngayNhap;
         this.maKhachHang = maKhachHang;
@@ -105,7 +106,5 @@ public class HoaDon implements Serializable{
     public void setPttt(String pttt) {
         this.pttt = pttt;
     }
-    
-    
-   
+
 }

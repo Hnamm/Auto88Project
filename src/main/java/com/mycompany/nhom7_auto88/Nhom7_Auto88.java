@@ -5,6 +5,9 @@
 package com.mycompany.nhom7_auto88;
 
 import Views.DangNhapForm;
+import Views.QuanLyNhanVienForm;
+
+
 
 /**
  *
@@ -13,6 +16,7 @@ import Views.DangNhapForm;
 public class Nhom7_Auto88 {
 
     public static void main(String[] args) {       
-        DangNhapForm dangNhapForm = new DangNhapForm();
+        DangNhapForm form = new DangNhapForm();
+        form.setVisible(true);
     }
 }
