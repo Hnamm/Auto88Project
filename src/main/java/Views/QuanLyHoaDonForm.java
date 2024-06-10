@@ -25,7 +25,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     public HoaDonModel hdm;
     public ArrayList<HoaDon> list;
     public DefaultTableModel tb_model;
-    String fileName = "hoaDon.txt";
+    String fileName = "src/main/java/Files/hoaDon.txt";
     private static int pos = 0;
     public SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
