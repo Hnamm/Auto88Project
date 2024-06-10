@@ -80,7 +80,6 @@
                               <Component id="btnQuanLyKhachHang" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnQuanLyNhanVien" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnQuanLyHoaDon" max="32767" attributes="0"/>
-                              <Component id="btnQuanLyTaiKhoan" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -112,9 +111,7 @@
                   <Component id="btnQuanLyNhanVien" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btnQuanLyKhachHang" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="btnQuanLyTaiKhoan" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                  <EmptySpace pref="180" max="32767" attributes="0"/>
                   <Component id="btnDangXuat" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -173,14 +170,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuanLyKhachHangActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnQuanLyTaiKhoan">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; t&#xe0;i kho&#x1ea3;n"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnDangXuat">
           <Properties>

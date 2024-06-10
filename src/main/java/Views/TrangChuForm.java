@@ -40,7 +40,6 @@ public class TrangChuForm extends javax.swing.JFrame {
         btnQuanLyHoaDon = new javax.swing.JButton();
         btnQuanLyNhanVien = new javax.swing.JButton();
         btnQuanLyKhachHang = new javax.swing.JButton();
-        btnQuanLyTaiKhoan = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
@@ -88,9 +87,6 @@ public class TrangChuForm extends javax.swing.JFrame {
             }
         });
 
-        btnQuanLyTaiKhoan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnQuanLyTaiKhoan.setText("Quản lý tài khoản");
-
         btnDangXuat.setBackground(new java.awt.Color(255, 102, 102));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDangXuat.setText("Đăng Xuất");
@@ -123,8 +119,7 @@ public class TrangChuForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnQuanLyKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnQuanLyNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnQuanLyHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnQuanLyTaiKhoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnQuanLyHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jLabel1)
@@ -149,9 +144,7 @@ public class TrangChuForm extends javax.swing.JFrame {
                 .addComponent(btnQuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnQuanLyKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnQuanLyTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addComponent(btnDangXuat)
                 .addGap(24, 24, 24))
         );
@@ -312,7 +305,6 @@ public class TrangChuForm extends javax.swing.JFrame {
     private javax.swing.JButton btnQuanLyHoaDon;
     private javax.swing.JButton btnQuanLyKhachHang;
     private javax.swing.JButton btnQuanLyNhanVien;
-    private javax.swing.JButton btnQuanLyTaiKhoan;
     private javax.swing.JButton btnQuanLyXe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
