@@ -31,7 +31,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
     public XeModel xeModel;
     public ArrayList<Xe> danhSachXe;
     public DefaultTableModel tb_model;
-    String fileName = "src\\main\\java\\Files\\Xe.txt";
+    String fileName = "src\\main\\java\\files\\Xe.txt";
     /**
      * Creates new form QuanLyXeForm
      */
