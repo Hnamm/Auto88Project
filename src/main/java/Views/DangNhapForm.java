@@ -61,6 +61,12 @@ public class DangNhapForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Mật Khẩu:");
 
+        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenDangNhapActionPerformed(evt);
+            }
+        });
+
         txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMatKhauActionPerformed(evt);
@@ -144,6 +150,7 @@ public class DangNhapForm extends javax.swing.JFrame {
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
         // TODO add your handling code here:
+        btnDangNhapActionPerformed(evt);
     }//GEN-LAST:event_txtMatKhauActionPerformed
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
@@ -162,10 +169,12 @@ public class DangNhapForm extends javax.swing.JFrame {
             String passwordString = (new String(password)).trim();
             
             if(username.equals("")) {
+                txtTenDangNhap.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống tên đăng nhập");
                 return;
             }
             if(passwordString.equals("")) {
+                txtMatKhau.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống mật khẩu");
                 return;
             }
@@ -179,11 +188,17 @@ public class DangNhapForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng"); 
                 txtTenDangNhap.setText("");
                 txtMatKhau.setText("");
+                txtTenDangNhap.requestFocus();
             }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(DangNhapForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
+        // TODO add your handling code here:
+        btnDangNhapActionPerformed(evt);
+    }//GEN-LAST:event_txtTenDangNhapActionPerformed
 
     /**
      * @param args the command line arguments

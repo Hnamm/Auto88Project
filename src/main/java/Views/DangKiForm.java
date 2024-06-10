@@ -68,6 +68,12 @@ public class DangKiForm extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Xác nhận mật khẩu :");
 
+        txtTenTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenTaiKhoanActionPerformed(evt);
+            }
+        });
+
         btnDangKy.setBackground(new java.awt.Color(204, 255, 204));
         btnDangKy.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDangKy.setText("Đăng ký");
@@ -90,6 +96,18 @@ public class DangKiForm extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("Đăng Ký");
+
+        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMatKhauActionPerformed(evt);
+            }
+        });
+
+        txtXacNhanMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtXacNhanMatKhauActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,18 +194,22 @@ public class DangKiForm extends javax.swing.JFrame {
             String xacNhanPasswordString = (new String(xacNhanPassword)).trim();
             
             if(username.equals("")) {
+                txtTenTaiKhoan.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống tên tài khoản");
                 return;
             }
             if(passwordString.equals("")) {
+                txtMatKhau.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống mật khẩu");
                 return;
             }
             if(xacNhanPasswordString.equals("")) {
+                txtXacNhanMatKhau.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống xác nhận mật khẩu");
                 return;
             }
             if(!xacNhanPasswordString.equals(passwordString)) {
+                txtXacNhanMatKhau.requestFocus();
                 JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không khớp");
                 txtXacNhanMatKhau.setText("");
                 return;
@@ -196,6 +218,7 @@ public class DangKiForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Mật khẩu phải có tối thiểu sáu ký tự, ít nhất một chữ cái và một số");
                 txtMatKhau.setText("");
                 txtXacNhanMatKhau.setText("");
+                txtMatKhau.requestFocus();
                 return;
             }
             TaiKhoan taiKhoanMoi = new TaiKhoan(username, passwordString);
@@ -205,6 +228,7 @@ public class DangKiForm extends javax.swing.JFrame {
                     txtTenTaiKhoan.setText("");
                     txtMatKhau.setText("");
                     txtXacNhanMatKhau.setText("");
+                    txtTenTaiKhoan.requestFocus();
                     return;
                 }             
             }
@@ -230,6 +254,21 @@ public class DangKiForm extends javax.swing.JFrame {
         //        form.setVisible(true);
         //        form.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHuyBoActionPerformed
+
+    private void txtTenTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenTaiKhoanActionPerformed
+        // TODO add your handling code here:
+        btnDangKyActionPerformed(evt);
+    }//GEN-LAST:event_txtTenTaiKhoanActionPerformed
+
+    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
+        // TODO add your handling code here:
+        btnDangKyActionPerformed(evt);
+    }//GEN-LAST:event_txtMatKhauActionPerformed
+
+    private void txtXacNhanMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXacNhanMatKhauActionPerformed
+        // TODO add your handling code here:
+        btnDangKyActionPerformed(evt);
+    }//GEN-LAST:event_txtXacNhanMatKhauActionPerformed
     
     private boolean checkRegex(String password) {
         Pattern patternPass;
