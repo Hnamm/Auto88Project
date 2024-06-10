@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author admin
  */
-public class KhachHang implements Serializable{
+public class KhachHang implements Serializable {
     private String maKhachHang;
     private String tenKhachHang;
     private String soDienThoai;
@@ -19,7 +19,8 @@ public class KhachHang implements Serializable{
     private boolean gioiTinh;
     private LoaiKhachHang loaiKhachHang;
 
-    public KhachHang(String maKhachHang, String tenKhachHang, String soDienThoai, String diaChi, boolean gioiTinh, LoaiKhachHang loaiKhachHang) {
+    public KhachHang(String maKhachHang, String tenKhachHang, String soDienThoai, String diaChi, boolean gioiTinh,
+            LoaiKhachHang loaiKhachHang) {
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.soDienThoai = soDienThoai;
@@ -75,7 +76,7 @@ public class KhachHang implements Serializable{
     public void setLoaiKhachHang(LoaiKhachHang loaiKhachHang) {
         this.loaiKhachHang = loaiKhachHang;
     }
-    
+
     @Override
     public int hashCode() {
         return this.maKhachHang.hashCode();
@@ -95,5 +96,5 @@ public class KhachHang implements Serializable{
         final KhachHang other = (KhachHang) obj;
         return Objects.equals(this.maKhachHang, other.maKhachHang);
     }
-    
+
 }

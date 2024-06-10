@@ -13,7 +13,7 @@ public enum LoaiKhachHang {
     THAN_THIET("Thân thiết"),
     CONG_TY("Công ty"),
     CA_NHAN("Cá nhân"),;
-    
+
     private final String displayName;
 
     public String getDisplayName() {
@@ -23,7 +23,7 @@ public enum LoaiKhachHang {
     private LoaiKhachHang(String displayName) {
         this.displayName = displayName;
     }
-    
+
     public static LoaiKhachHang fromDisplayName(String displayName) {
         for (LoaiKhachHang loai : LoaiKhachHang.values()) {
             if (loai.getDisplayName().equals(displayName)) {
