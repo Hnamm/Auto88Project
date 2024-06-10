@@ -1,7 +1,10 @@
 Models\TaiKhoanModel.class
 Views\DangNhapForm.class
 Views\QuanLyHoaDonForm$1.class
+Views\QuanLyKhachHangForm$10.class
+Views\QuanLyKhachHangForm$7.class
 Views\QuanLyNhanVienForm.class
+Views\QuanLyKhachHangForm$5.class
 Entities\TaiKhoan.class
 Views\TrangChuForm$5.class
 Views\DangNhapForm$2.class
@@ -11,8 +14,13 @@ Entities\NhanVien.class
 Entities\HoaDon.class
 Views\DangNhapForm$4.class
 Entities\KhachHang.class
+Views\QuanLyKhachHangForm$2.class
 Models\KhachHangModel.class
+<<<<<<< HEAD
 Views\DangKiForm$5.class
+=======
+Views\QuanLyKhachHangForm$6.class
+>>>>>>> 7583c9622a6292b5e97b370ec64a1ab4f7f33280
 Models\XeModel.class
 Views\QuanLyXeForm.class
 Views\QuanLyKhachHangForm$1.class
@@ -20,17 +28,25 @@ Models\HoaDonModel.class
 Views\TrangChuForm$4.class
 Views\DangNhapForm$3.class
 Views\TrangChuForm$2.class
+Views\QuanLyKhachHangForm$8.class
 Views\DangNhapForm$1.class
 Views\QuanLyNhanVienForm$1.class
 Views\DangKiForm$3.class
 Views\QuanLyHoaDonForm.class
 Views\DangKiForm.class
+<<<<<<< HEAD
 Views\TrangChuForm$6.class
+=======
+Views\QuanLyKhachHangForm$4.class
+>>>>>>> 7583c9622a6292b5e97b370ec64a1ab4f7f33280
 Models\NhanVienModel.class
+Views\QuanLyKhachHangForm$9.class
 Views\QuanLyXeForm$1.class
 Views\TrangChuForm.class
 com\mycompany\nhom7_auto88\Nhom7_Auto88.class
+Entities\LoaiKhachHang.class
 Entities\Xe.class
+Views\QuanLyKhachHangForm$3.class
 Views\QuanLyKhachHangForm.class
 Views\DangKiForm$1.class
 Views\DangKiForm$4.class
