@@ -2,6 +2,7 @@ Views\DangNhapForm.class
 Views\QuanLyHoaDonForm$15.class
 Views\QuanLyHoaDonForm$1.class
 Views\QuanLyKhachHangForm$10.class
+Views\QuanLyXeForm$9.class
 Views\QuanLyHoaDonForm$8.class
 Views\QuanLyKhachHangForm$5.class
 Views\DangNhapForm$2.class
@@ -11,6 +12,7 @@ Entities\NhanVien.class
 Views\QuanLyHoaDonForm$4.class
 Entities\HoaDon.class
 Views\QuanLyNhanVienForm$7.class
+Views\QuanLyXeForm$2.class
 Entities\KhachHang.class
 Views\QuanLyNhanVienForm$4.class
 Views\QuanLyKhachHangForm$2.class
@@ -18,7 +20,9 @@ Views\DangKiForm$5.class
 Views\QuanLyKhachHangForm$6.class
 Models\XeModel.class
 Views\QuanLyXeForm.class
+Views\QuanLyXeForm$5.class
 Views\DangNhapForm$1.class
+Views\QuanLyXeForm$8.class
 Views\DangKiForm$3.class
 Views\QuanLyHoaDonForm.class
 Views\QuanLyNhanVienForm$6.class
@@ -42,12 +46,15 @@ Entities\TaiKhoan.class
 Views\QuanLyHoaDonForm$10.class
 Views\QuanLyHoaDonForm$3.class
 Views\TrangChuForm$5.class
+Views\QuanLyXeForm$4.class
 Views\TrangChuForm$1.class
+Views\QuanLyXeForm$7.class
 Views\DangNhapForm$4.class
 Views\QuanLyHoaDonForm$13.class
 Views\QuanLyHoaDonForm$9.class
 Models\KhachHangModel.class
 Views\QuanLyKhachHangForm$1.class
+Views\QuanLyXeForm$3.class
 Models\HoaDonModel.class
 Views\TrangChuForm$4.class
 Views\DangNhapForm$3.class
@@ -66,4 +73,5 @@ Views\QuanLyKhachHangForm.class
 Views\QuanLyHoaDonForm$5.class
 Views\DangKiForm$1.class
 Views\DangKiForm$4.class
+Views\QuanLyXeForm$6.class
 Views\QuanLyNhanVienForm$8.class
