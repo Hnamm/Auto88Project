@@ -20,6 +20,7 @@ Views\DangKiForm$5.class
 Views\QuanLyKhachHangForm$6.class
 Models\XeModel.class
 Views\QuanLyXeForm.class
+Views\QuanLyHoaDonForm$16.class
 Views\QuanLyXeForm$5.class
 Views\DangNhapForm$1.class
 Views\QuanLyXeForm$8.class
@@ -54,6 +55,7 @@ Views\QuanLyHoaDonForm$13.class
 Views\QuanLyHoaDonForm$9.class
 Models\KhachHangModel.class
 Views\QuanLyKhachHangForm$1.class
+Views\QuanLyKhachHangForm$11.class
 Views\QuanLyXeForm$3.class
 Models\HoaDonModel.class
 Views\TrangChuForm$4.class
