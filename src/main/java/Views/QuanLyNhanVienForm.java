@@ -47,7 +47,7 @@ public class QuanLyNhanVienForm extends javax.swing.JFrame {
         }
 
         tb_model = (DefaultTableModel) danhSachNhanVienTable.getModel();
-        hienThiDanhSach();
+        hienThiDanhSach(tb_model);
         chon_NhanVien();
     }
 
@@ -519,7 +519,7 @@ public class QuanLyNhanVienForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công!", "Thông báo",
                             JOptionPane.INFORMATION_MESSAGE);
                     LuuFile(fileName, danhSachNhanVien);
-                    hienThiDanhSach();
+                    hienThiDanhSach(tb_model);
                 }
             }
         } catch (Exception e) {
@@ -744,10 +744,10 @@ public class QuanLyNhanVienForm extends javax.swing.JFrame {
     }
 
     // hiển thị danh sach fakedata
-    public void hienThiDanhSach() {
-        tb_model.setRowCount(0);
+    public void hienThiDanhSach(DefaultTableModel model) {
+        model.setRowCount(0);
         for (NhanVien nhanVien : danhSachNhanVien) {
-            tb_model.addRow(new Object[] {
+            model.addRow(new Object[] {
                     nhanVien.getId(),
                     nhanVien.getTen(),
                     nhanVien.getSoDienThoai(),

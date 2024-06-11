@@ -51,7 +51,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
         }
 
         tb_model = (DefaultTableModel) danhSachXeTable.getModel();
-        hienThiDanhSach();
+        hienThiDanhSach(tb_model);
         chon_Xe();
     }
 
@@ -545,7 +545,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Thêm xe thành công", "Thông báo", HEIGHT);
                     // Lưu danh sách vào file hoặc cập nhật hiển thị nếu cần
                     LuuFile(fileName, danhSachXe); // giả sử bạn có hàm lưu file
-                    hienThiDanhSach();
+                    hienThiDanhSach(tb_model);
                 }
             }
         } catch (Exception e) {
@@ -647,7 +647,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
                         break;
                 }
                 // Cập nhật lại bảng sau khi sắp xếp
-                hienThiDanhSach();
+                hienThiDanhSach(tb_model);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi sắp xếp: " + e.getMessage(), "Lỗi",
@@ -694,7 +694,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
     }
 
     // doc file ra
-    public ArrayList docfile(String filename) {
+    public final ArrayList docfile(String filename) {
 
         danhSachXe = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
@@ -709,10 +709,10 @@ public class QuanLyXeForm extends javax.swing.JFrame {
     }
 
     // hiển thị danh sach fakedata
-    public void hienThiDanhSach() {
-        tb_model.setRowCount(0);
+    public final void hienThiDanhSach(DefaultTableModel model) {
+        model.setRowCount(0);
         for (Xe xe : danhSachXe) {
-            tb_model.addRow(new Object[] {
+            model.addRow(new Object[] {
                     xe.getMaXe(),
                     xe.getTenXe(),
                     xe.getHangSanXuat(),
