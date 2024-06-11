@@ -24,7 +24,7 @@ public class KhachHangModel {
     private static KhachHangModel instance;
     private Set<KhachHang> khachHangs;
 
-    private KhachHangModel() {
+    public KhachHangModel() {
         khachHangs = new LinkedHashSet<KhachHang>();
         Set<KhachHang> loadedKhachHangs = (Set<KhachHang>) KhachHangModel
                 .readDateFromFile("src/main/java/files/KhachHang.txt");
