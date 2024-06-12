@@ -8,6 +8,12 @@ import Models.HoaDonModel;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Entities.HoaDon;
+import Models.KhachHangModel;
+import Models.NhanVienModel;
+import Models.XeModel;
+import Entities.KhachHang;
+import Entities.NhanVien;
+import Entities.Xe;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,84 +23,159 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import Views.QuanLyKhachHangForm;
+import Views.QuanLyNhanVienForm;
+import Views.QuanLyXeForm;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author admin
  */
 public class QuanLyHoaDonForm extends javax.swing.JFrame {
-        public HoaDonModel hdm;
-        public ArrayList<HoaDon> list;
-        public DefaultTableModel tb_model;
-        String fileName = "src/main/java/Files/hoaDon.txt";
-        private static int pos = 0;
-        public SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-        public QuanLyHoaDonForm() {
-                initComponents();
-                this.setTitle("Quản lý vật tư");
-                this.setLocationRelativeTo(null);
-                hdm = new HoaDonModel();
-                // hdm.fakeData();
-                list = hdm.docfile(fileName);
-                // list = hdm.getDshd();
-                tb_model = (DefaultTableModel) tb_hoaDon.getModel();
-                hienthidsfake();
+    public HoaDonModel hdm;
+    public KhachHangModel khm;
+    public ArrayList<HoaDon> list;
+    public ArrayList<Xe> dsxe;
+    public Set<KhachHang> dskh;
+    public ArrayList<NhanVien> dsnv;
+    public QuanLyNhanVienForm nvf;
+    public QuanLyKhachHangForm khf;
+    public QuanLyXeForm xef;
+    public DefaultTableModel tb_model;
+    String fileName = "src/main/java/Files/hoaDon.txt";
+    private static int pos = 0;
+    public SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    public QuanLyHoaDonForm() {
+        initComponents();
+        this.setTitle("Quản lý hóa đơn");
+        this.setLocationRelativeTo(null);
+        hdm = new HoaDonModel();
+        //hdm.fakeData();
+        hdm.setDshd(hdm.docfile(fileName));
+        list = hdm.getDshd();
+        dsxe = docfile2("src/main/java/Files/Xe.txt");
+        khm = new KhachHangModel();
+        dskh = khm.readDateFromFile("src/main/java/files/KhachHang.txt");
+        dsnv = docfile("src/main/java/files/NhanVien.txt");
+        tb_model = (DefaultTableModel) tb_hoaDon.getModel();
+        hienthidsfake();
+    }
+
+    public ArrayList docfile(String filename) {
+
+        dsnv = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            dsnv = (ArrayList<NhanVien>) ois.readObject();
+
+        } catch (IOException E) {
+            System.out.println("Loi" + E.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Loi" + ex.getMessage());
         }
+        return dsnv;
+    }
 
-        public void view() {
+    public final ArrayList docfile2(String filename) {
 
-                HoaDon x = list.get(pos);
-                String ngayNhapFormatted = dateFormat.format(x.getNgayNhap());
-                txt_maHoaDon.setText(x.getMaHoaDon());
-                txt_ngayLap.setText(ngayNhapFormatted);
-                txt_maKhachHang.setText(x.getMaKhachHang());
-                txt_maXe.setText(x.getMaXe());
-                txt_soLuong.setText("" + x.getSoLuong());
-                txt_donGia.setText("" + x.getDonGia());
-                txt_maNhanVien.setText(x.getMaNV());
-                cb_pttt.setSelectedItem(x.getPttt());
+        dsxe = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            dsxe = (ArrayList<Xe>) ois.readObject();
+
+        } catch (IOException E) {
+            System.out.println("Loi" + E.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Loi" + ex.getMessage());
         }
+        return dsxe;
+    }
 
-        public void resetForm() {
-                txt_maHoaDon.setText("");
-                txt_ngayLap.setText("");
-                txt_maKhachHang.setText("");
-                txt_maXe.setText("");
-                txt_soLuong.setText("");
-                txt_donGia.setText("");
-                txt_maNhanVien.setText("");
-                cb_pttt.setSelectedIndex(0); // Reset combobox về giá trị mặc định
+    public void view() {
+
+        HoaDon x = list.get(pos);
+        String ngayNhapFormatted = dateFormat.format(x.getNgayNhap());
+        txt_maHoaDon.setText(x.getMaHoaDon());
+        txt_ngayLap.setText(ngayNhapFormatted);
+        txt_maKhachHang.setText(x.getMaKhachHang());
+        txt_maXe.setText(x.getMaXe());
+        txt_soLuong.setText("" + x.getSoLuong());
+        txt_donGia.setText("" + x.getDonGia());
+        txt_maNhanVien.setText(x.getMaNV());
+        cb_pttt.setSelectedItem(x.getPttt());
+    }
+
+    public void resetForm() {
+        txt_maHoaDon.setText("");
+        txt_ngayLap.setText("");
+        txt_maKhachHang.setText("");
+        txt_maXe.setText("");
+        txt_soLuong.setText("");
+        txt_donGia.setText("");
+        txt_maNhanVien.setText("");
+        cb_pttt.setSelectedIndex(0); // Reset combobox về giá trị mặc định
+    }
+
+    public void hienthidsfake() {
+        tb_model.setNumRows(0);
+        for (HoaDon hoaDon : list) {
+            String ngayNhapFormatted = dateFormat.format(hoaDon.getNgayNhap());
+            tb_model.addRow(new Object[]{
+                hoaDon.getMaHoaDon(),
+                ngayNhapFormatted,
+                hoaDon.getMaKhachHang(),
+                hoaDon.getMaXe(),
+                hoaDon.getSoLuong(),
+                hoaDon.getDonGia(),
+                hoaDon.ThanhTien(),
+                hoaDon.getMaNV(),
+                hoaDon.getPttt()});
         }
+    }
 
-        public void hienthidsfake() {
-                tb_model.setNumRows(0);
-                for (HoaDon hoaDon : list) {
-                        String ngayNhapFormatted = dateFormat.format(hoaDon.getNgayNhap());
-                        tb_model.addRow(new Object[] {
-                                        hoaDon.getMaHoaDon(),
-                                        ngayNhapFormatted,
-                                        hoaDon.getMaKhachHang(),
-                                        hoaDon.getMaXe(),
-                                        hoaDon.getSoLuong(),
-                                        hoaDon.getDonGia(),
-                                        hoaDon.ThanhTien(),
-                                        hoaDon.getMaNV(),
-                                        hoaDon.getPttt() });
-                }
+    public HoaDon kiemtratontai(String maHoaDon) {
+        for (HoaDon hoaDon : list) {
+            if (hoaDon.getMaHoaDon().equals(maHoaDon)) {
+                return hoaDon;
+            }
         }
+        return null;
+    }
 
-        public HoaDon kiemtratontai(String maHoaDon) {
-                for (HoaDon hoaDon : list) {
-                        if (hoaDon.getMaHoaDon().equals(maHoaDon)) {
-                                return hoaDon;
-                        }
-                }
-                return null;
+    public boolean kiemTraXe(String maXe) {
+        for (Xe xe : dsxe) {
+            if (xe.getMaXe().equals(maXe)) {
+                return true;
+            }
         }
+        return false;
+    }
 
-        @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated
+    public boolean kiemTraNhanVien(String maNV) {
+        for (NhanVien nv : dsnv) {
+            if (nv.getId().equals(maNV)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void getModel(HoaDon hd) {
+        String ngayNhapFormatted = dateFormat.format(hd.getNgayNhap());
+        txt_maHoaDon.setText(hd.getMaHoaDon());
+        txt_ngayLap.setText(ngayNhapFormatted);
+        txt_maKhachHang.setText(hd.getMaKhachHang());
+        txt_maXe.setText(hd.getMaXe());
+        txt_soLuong.setText("" + hd.getSoLuong());
+        txt_donGia.setText("" + hd.getDonGia());
+        txt_maNhanVien.setText(hd.getMaNV());
+        cb_pttt.setSelectedItem(hd.getPttt());
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -123,13 +204,13 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
         txt_maNhanVien = new javax.swing.JTextField();
         cbx_pttt = new javax.swing.JLabel();
         cb_pttt = new javax.swing.JComboBox<>();
+        btn_giaGoc = new javax.swing.JButton();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         btn_reset = new javax.swing.JButton();
         btnTroLai = new javax.swing.JButton();
+        btn_tim = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_hoaDon = new javax.swing.JTable();
@@ -234,7 +315,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                 .addComponent(cbx_pttt)
                 .addGap(30, 30, 30)
                 .addComponent(cb_pttt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,8 +326,17 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                     .addComponent(cbx_pttt)
                     .addComponent(txt_maNhanVien)
                     .addComponent(cb_pttt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
+
+        btn_giaGoc.setBackground(new java.awt.Color(204, 255, 204));
+        btn_giaGoc.setForeground(new java.awt.Color(51, 51, 51));
+        btn_giaGoc.setText("Giá gốc");
+        btn_giaGoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_giaGocActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -255,13 +345,15 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addGap(37, 37, 37)
-                .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
                 .addComponent(lable_donGia, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_donGia, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(btn_giaGoc)
+                .addContainerGap(90, Short.MAX_VALUE))
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
@@ -272,7 +364,8 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lable_donGia)
-                    .addComponent(txt_donGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_donGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_giaGoc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -287,9 +380,9 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(120, 120, 120)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txt_maXe, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -301,9 +394,9 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_maXe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -319,7 +412,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                 .addComponent(txt_maHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121)
                 .addComponent(jLabel5)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_ngayLap, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -378,19 +471,6 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         btn_reset.setBackground(new java.awt.Color(255, 255, 51));
         btn_reset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_reset.setText("Reset");
@@ -407,30 +487,39 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             }
         });
 
+        btn_tim.setBackground(new java.awt.Color(255, 255, 0));
+        btn_tim.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_tim.setText("Tìm kiếm");
+        btn_tim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnTroLai)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
-                .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTroLai)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,10 +536,9 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                     .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_tim, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -496,7 +584,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 907, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -504,7 +592,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(161, 161, 161)
@@ -525,260 +613,312 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_btnTroLaiActionPerformed
 
-        private void txt_maXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maXeActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_maXeActionPerformed
-
-        private void txt_maKhachHangActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maKhachHangActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_maKhachHangActionPerformed
-
-        private void txt_ngayLapActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_ngayLapActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_ngayLapActionPerformed
-
-        private void txt_maHoaDonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maHoaDonActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_maHoaDonActionPerformed
-
-        private void txt_soLuongActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_soLuongActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_soLuongActionPerformed
-
-        private void txt_donGiaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_donGiaActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_donGiaActionPerformed
-
-        private void txt_maNhanVienActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maNhanVienActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txt_maNhanVienActionPerformed
-
-        private void cb_ptttActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cb_ptttActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_cb_ptttActionPerformed
-
-        private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_suaActionPerformed
-                String maHoaDon = txt_maHoaDon.getText();
-                String ngayLap = txt_ngayLap.getText();
-                String maKhachHang = txt_maKhachHang.getText();
-                String maXe = txt_maXe.getText();
-                String soLuongStr = txt_soLuong.getText();
-                String donGiaStr = txt_donGia.getText();
-                String pttt = (String) cb_pttt.getSelectedItem();
-                String maNV = txt_maNhanVien.getText();
-
-                // Kiểm tra các trường không được bỏ trống
-                if (maHoaDon.isEmpty() || ngayLap.isEmpty() || maKhachHang.isEmpty() || maXe.isEmpty()
-                                || soLuongStr.isEmpty()
-                                || donGiaStr.isEmpty() || pttt.isEmpty() || maNV.isEmpty()) {
-                        JOptionPane.showMessageDialog(rootPane, "Bạn phải điền đầy đủ thông tin", "Thông báo",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                }
-
-                // Kiểm tra số lượng và đơn giá phải là số nguyên và không nhỏ hơn 0
-                int soLuong;
-                int donGia;
-                try {
-                        soLuong = Integer.parseInt(soLuongStr);
-                        donGia = Integer.parseInt(donGiaStr);
-                        if (soLuong < 0 || donGia < 0) {
-                                JOptionPane.showMessageDialog(rootPane,
-                                                "Số lượng và đơn giá phải là số nguyên không nhỏ hơn 0",
-                                                "Thông báo", JOptionPane.WARNING_MESSAGE);
-                                return;
-                        }
-                } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Số lượng và đơn giá phải là số nguyên", "Thông báo",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                }
-
-                // Kiểm tra định dạng ngày nhập
-                Date ngayNhap;
-                try {
-                        ngayNhap = dateFormat.parse(ngayLap); // Chuyển đổi chuỗi ngày lập thành đối tượng Date
-                } catch (ParseException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Ngày nhập phải đúng định dạng dd/MM/yyyy", "Thông báo",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                }
-
-                // Kiểm tra xem mã hóa đơn có tồn tại trong danh sách hay không
-                HoaDon ktHoaDon = kiemtratontai(maHoaDon);
-                HoaDon hoaDon = new HoaDon(maHoaDon, ngayNhap, maKhachHang, maXe, soLuong, donGia, maNV, pttt);
-                if (ktHoaDon == null) {
-                        JOptionPane.showMessageDialog(rootPane, "Hóa đơn không tồn tại", "Thông báo",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                } else {
-                        hdm.update(hoaDon);
-                }
-
-                // Cập nhật danh sách và giao diện
-                hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
-                hdm.LuuFile(fileName, list); // Lưu danh sách vào file
-                JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", "Thông báo",
-                                JOptionPane.INFORMATION_MESSAGE);
-                resetForm(); // Reset form sau khi cập nhật thành công
-        }// GEN-LAST:event_btn_suaActionPerformed
-
-        private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_themActionPerformed
-                try {
-                        // Lấy giá trị từ các trường nhập liệu
-                        String maHoaDon = txt_maHoaDon.getText();
-                        String ngayLap = txt_ngayLap.getText();
-                        String maKhachHang = txt_maKhachHang.getText();
-                        String maXe = txt_maXe.getText();
-                        String soLuongStr = txt_soLuong.getText();
-                        String donGiaStr = txt_donGia.getText();
-                        String maNV = txt_maNhanVien.getText();
-                        String pttt = (String) cb_pttt.getSelectedItem();
-
-                        // Kiểm tra các trường không được bỏ trống
-                        if (maHoaDon.isEmpty() || ngayLap.isEmpty() || maKhachHang.isEmpty() || maXe.isEmpty()
-                                        || soLuongStr.isEmpty() || donGiaStr.isEmpty() || maNV.isEmpty()
-                                        || pttt.isEmpty()) {
-                                JOptionPane.showMessageDialog(null, "Bạn phải điền đầy đủ thông tin", "Thông báo",
-                                                JOptionPane.WARNING_MESSAGE);
-                                return;
-                        }
-
-                        // Kiểm tra mã hóa đơn không được trùng trong danh sách
-                        for (HoaDon hd : list) {
-                                if (hd.getMaHoaDon().equals(maHoaDon)) {
-                                        JOptionPane.showMessageDialog(null, "Mã hóa đơn đã tồn tại", "Thông báo",
-                                                        JOptionPane.WARNING_MESSAGE);
-                                        return;
-                                }
-                        }
-
-                        // Kiểm tra số lượng và đơn giá phải là số nguyên và không nhỏ hơn 0
-                        int soLuong;
-                        int donGia;
-                        try {
-                                soLuong = Integer.parseInt(soLuongStr);
-                                donGia = Integer.parseInt(donGiaStr);
-                                if (soLuong < 0 || donGia < 0) {
-                                        JOptionPane.showMessageDialog(null,
-                                                        "Số lượng và đơn giá phải là số nguyên lớn hơn 0", "Thông báo",
-                                                        JOptionPane.WARNING_MESSAGE);
-                                        return;
-                                }
-                        } catch (NumberFormatException e) {
-                                JOptionPane.showMessageDialog(null, "Số lượng và đơn giá phải là số nguyên",
-                                                "Thông báo",
-                                                JOptionPane.WARNING_MESSAGE);
-                                return;
-                        }
-
-                        // Kiểm tra định dạng ngày nhập
-                        Date ngayNhap;
-                        try {
-                                ngayNhap = dateFormat.parse(ngayLap); // Chuyển đổi chuỗi ngày lập thành đối tượng Date
-                        } catch (ParseException e) {
-                                JOptionPane.showMessageDialog(null, "Ngày nhập phải đúng định dạng dd/MM/yyyy",
-                                                "Thông báo",
-                                                JOptionPane.WARNING_MESSAGE);
-                                return;
-                        }
-
-                        // Tạo đối tượng HoaDon mới
-                        HoaDon hoaDon = new HoaDon(maHoaDon, ngayNhap, maKhachHang, maXe, soLuong, donGia, maNV, pttt);
-
-                        // Thêm vào danh sách và cập nhật giao diện
-                        hdm.add(hoaDon);
-                        hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
-                        hdm.LuuFile(fileName, list); // Lưu danh sách vào file
-
-                        JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo",
-                                        JOptionPane.INFORMATION_MESSAGE);
-                        resetForm(); // Reset form sau khi thêm thành công
-                } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Có lỗi xảy ra: " + e.getMessage(), "Thông báo",
-                                        JOptionPane.ERROR_MESSAGE);
-                }
-        }// GEN-LAST:event_btn_themActionPerformed
-
-        private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_xoaActionPerformed
-                String maHoaDon = txt_maHoaDon.getText();
-                if (maHoaDon.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Bạn phải nhập mã hóa đơn", "Thông báo",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                }
-                HoaDon ktHoaDon = kiemtratontai(maHoaDon);
-                if (ktHoaDon == null) {
-                        JOptionPane.showMessageDialog(rootPane, "Hóa đơn không tồn tại", "Thông báo",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                } else {
-                        hdm.remove(maHoaDon);
-                        hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
-                        hdm.LuuFile(fileName, list);
-                }
-        }// GEN-LAST:event_btn_xoaActionPerformed
-
-        private void tb_hoaDonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tb_hoaDonMouseClicked
-                pos = this.tb_hoaDon.getSelectedRow();
-                view();
-        }// GEN-LAST:event_tb_hoaDonMouseClicked
-
-        private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_resetActionPerformed
-                txt_maHoaDon.setEnabled(true);
+    private void btn_timActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timActionPerformed
+        String mahd = txt_maHoaDon.getText();
+        HoaDon hd = kiemtratontai(mahd);
+        if (hd != null) {
+            txt_maHoaDon.setEnabled(false);
+            getModel(hd);
+        } else {
+            if (mahd.isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập mã hóa đơn", "Thông báo", HEIGHT);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Hóa đơn ko tồn tại", "Thông báo", HEIGHT);
                 resetForm();
-        }// GEN-LAST:event_btn_resetActionPerformed
+            }
+        }
+    }//GEN-LAST:event_btn_timActionPerformed
 
-        public static void main(String args[]) {
-                /* Set the Nimbus look and feel */
-                // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-                // (optional) ">
-                /*
+    private void btn_giaGocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_giaGocActionPerformed
+        String maXe = txt_maXe.getText();
+        if (maXe.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (kiemTraXe(maXe)) {
+            for (Xe xe : dsxe) {
+                if (xe.getMaXe().equals(maXe)) {
+                    txt_donGia.setText("" + xe.getGiaBan());
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_giaGocActionPerformed
+
+    private void txt_maXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maXeActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_txt_maXeActionPerformed
+
+    private void txt_maKhachHangActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maKhachHangActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_txt_maKhachHangActionPerformed
+
+    private void txt_ngayLapActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_ngayLapActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_txt_ngayLapActionPerformed
+
+    private void txt_maHoaDonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maHoaDonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_txt_maHoaDonActionPerformed
+
+    private void txt_soLuongActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_soLuongActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_txt_soLuongActionPerformed
+
+    private void txt_donGiaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_donGiaActionPerformed
+
+    }// GEN-LAST:event_txt_donGiaActionPerformed
+
+    private void txt_maNhanVienActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txt_maNhanVienActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_txt_maNhanVienActionPerformed
+
+    private void cb_ptttActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cb_ptttActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_cb_ptttActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_suaActionPerformed
+        String maHoaDon = txt_maHoaDon.getText();
+        String ngayLap = txt_ngayLap.getText();
+        String maKhachHang = txt_maKhachHang.getText();
+        String maXe = txt_maXe.getText();
+        String soLuongStr = txt_soLuong.getText();
+        String donGiaStr = txt_donGia.getText();
+        String pttt = (String) cb_pttt.getSelectedItem();
+        String maNV = txt_maNhanVien.getText();
+
+        // Kiểm tra các trường không được bỏ trống
+        if (maHoaDon.isEmpty() || ngayLap.isEmpty() || maKhachHang.isEmpty() || maXe.isEmpty()
+                || soLuongStr.isEmpty()
+                || donGiaStr.isEmpty() || pttt.isEmpty() || maNV.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn phải điền đầy đủ thông tin", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!kiemTraXe(maXe)) {
+            JOptionPane.showMessageDialog(null, "Mã xe phải tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!kiemTraNhanVien(maNV)) {
+            JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // Kiểm tra số lượng và đơn giá phải là số nguyên và không nhỏ hơn 0
+        int soLuong;
+        int donGia;
+        try {
+            soLuong = Integer.parseInt(soLuongStr);
+            donGia = Integer.parseInt(donGiaStr);
+            if (soLuong < 0 || donGia < 0) {
+                JOptionPane.showMessageDialog(rootPane,
+                        "Số lượng và đơn giá phải là số nguyên không nhỏ hơn 0",
+                        "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Số lượng và đơn giá phải là số nguyên", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra định dạng ngày nhập
+        Date ngayNhap;
+        try {
+            ngayNhap = dateFormat.parse(ngayLap); // Chuyển đổi chuỗi ngày lập thành đối tượng Date
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(rootPane, "Ngày nhập phải đúng định dạng dd/MM/yyyy", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra xem mã hóa đơn có tồn tại trong danh sách hay không
+        HoaDon ktHoaDon = kiemtratontai(maHoaDon);
+        HoaDon hoaDon = new HoaDon(maHoaDon, ngayNhap, maKhachHang, maXe, soLuong, donGia, maNV, pttt);
+        if (ktHoaDon == null) {
+            JOptionPane.showMessageDialog(rootPane, "Hóa đơn không tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            hdm.update(hoaDon);
+        }
+
+        // Cập nhật danh sách và giao diện
+        hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
+        hdm.LuuFile(fileName, list); // Lưu danh sách vào file
+        JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", "Thông báo",
+                JOptionPane.INFORMATION_MESSAGE);
+        resetForm(); // Reset form sau khi cập nhật thành công
+    }// GEN-LAST:event_btn_suaActionPerformed
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_themActionPerformed
+        try {
+            // Lấy giá trị từ các trường nhập liệu
+            String maHoaDon = txt_maHoaDon.getText();
+            String ngayLap = txt_ngayLap.getText();
+            String maKhachHang = txt_maKhachHang.getText();
+            String maXe = txt_maXe.getText();
+            String soLuongStr = txt_soLuong.getText();
+            String donGiaStr = txt_donGia.getText();
+            String maNV = txt_maNhanVien.getText();
+            String pttt = (String) cb_pttt.getSelectedItem();
+
+            // Kiểm tra các trường không được bỏ trống
+            if (maHoaDon.isEmpty() || ngayLap.isEmpty() || maKhachHang.isEmpty() || maXe.isEmpty()
+                    || soLuongStr.isEmpty() || donGiaStr.isEmpty() || maNV.isEmpty()
+                    || pttt.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Bạn phải điền đầy đủ thông tin", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Kiểm tra mã hóa đơn không được trùng trong danh sách
+            for (HoaDon hd : list) {
+                if (hd.getMaHoaDon().equals(maHoaDon)) {
+                    JOptionPane.showMessageDialog(null, "Mã hóa đơn đã tồn tại", "Thông báo",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+            if (!kiemTraXe(maXe)) {
+                JOptionPane.showMessageDialog(null, "Mã xe phải tồn tại", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!kiemTraNhanVien(maNV)) {
+                JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            // Kiểm tra số lượng và đơn giá phải là số nguyên và không nhỏ hơn 0
+            int soLuong;
+            int donGia;
+            try {
+                soLuong = Integer.parseInt(soLuongStr);
+                donGia = Integer.parseInt(donGiaStr);
+                if (soLuong < 0 || donGia < 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "Số lượng và đơn giá phải là số nguyên lớn hơn 0", "Thông báo",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Số lượng và đơn giá phải là số nguyên",
+                        "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Kiểm tra định dạng ngày nhập
+            Date ngayNhap;
+            try {
+                ngayNhap = dateFormat.parse(ngayLap); // Chuyển đổi chuỗi ngày lập thành đối tượng Date
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Ngày nhập phải đúng định dạng dd/MM/yyyy",
+                        "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Tạo đối tượng HoaDon mới
+            HoaDon hoaDon = new HoaDon(maHoaDon, ngayNhap, maKhachHang, maXe, soLuong, donGia, maNV, pttt);
+
+            // Thêm vào danh sách và cập nhật giao diện
+            hdm.add(hoaDon);
+            // Hàm này có thể là cập nhật bảng hoặc giao diện khác
+            hdm.LuuFile(fileName, list); // Lưu danh sách vào file
+            hienthidsfake();
+            JOptionPane.showMessageDialog(null, "Thêm thành công", "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
+            resetForm(); // Reset form sau khi thêm thành công
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra: " + e.getMessage(), "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }// GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_xoaActionPerformed
+        String maHoaDon = txt_maHoaDon.getText();
+        if (maHoaDon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Bạn phải nhập mã hóa đơn", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        HoaDon ktHoaDon = kiemtratontai(maHoaDon);
+        if (ktHoaDon == null) {
+            JOptionPane.showMessageDialog(rootPane, "Hóa đơn không tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            hdm.remove(maHoaDon);
+            hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
+            hdm.LuuFile(fileName, list);
+        }
+    }// GEN-LAST:event_btn_xoaActionPerformed
+
+    private void tb_hoaDonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tb_hoaDonMouseClicked
+        pos = this.tb_hoaDon.getSelectedRow();
+        view();
+    }// GEN-LAST:event_tb_hoaDonMouseClicked
+
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_resetActionPerformed
+        txt_maHoaDon.setEnabled(true);
+        resetForm();
+    }// GEN-LAST:event_btn_resetActionPerformed
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
                  * If Nimbus (introduced in Java SE 6) is not available, stay with the default
                  * look and feel.
                  * For details see
                  * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-                 */
-                try {
-                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-                                        .getInstalledLookAndFeels()) {
-                                if ("Nimbus".equals(info.getName())) {
-                                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                        break;
-                                }
-                        }
-                } catch (ClassNotFoundException ex) {
-                        java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
-                                        java.util.logging.Level.SEVERE,
-                                        null, ex);
-                } catch (InstantiationException ex) {
-                        java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
-                                        java.util.logging.Level.SEVERE,
-                                        null, ex);
-                } catch (IllegalAccessException ex) {
-                        java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
-                                        java.util.logging.Level.SEVERE,
-                                        null, ex);
-                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                        java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
-                                        java.util.logging.Level.SEVERE,
-                                        null, ex);
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+                    .getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-                // </editor-fold>
-
-                /* Create and display the form */
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                        public void run() {
-                                new QuanLyHoaDonForm().setVisible(true);
-                        }
-                });
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
+                    java.util.logging.Level.SEVERE,
+                    null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
+                    java.util.logging.Level.SEVERE,
+                    null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
+                    java.util.logging.Level.SEVERE,
+                    null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(QuanLyHoaDonForm.class.getName()).log(
+                    java.util.logging.Level.SEVERE,
+                    null, ex);
         }
+        // </editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new QuanLyHoaDonForm().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTroLai;
+    private javax.swing.JButton btn_giaGoc;
     private javax.swing.JButton btn_reset;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_tim;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JComboBox<String> cb_pttt;
     private javax.swing.JLabel cbx_pttt;
@@ -798,9 +938,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lable_donGia;
     private javax.swing.JTable tb_hoaDon;
     private javax.swing.JTextField txt_donGia;

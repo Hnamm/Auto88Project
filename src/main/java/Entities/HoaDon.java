@@ -24,8 +24,8 @@ public class HoaDon implements Serializable {
     private String maNV;
     private String pttt;
 
-    public int ThanhTien() {
-        return soLuong * donGia;
+    public long ThanhTien() {
+        return (long) soLuong * donGia;
     }
 
     public HoaDon() {

@@ -12,6 +12,7 @@ Views\DangKiForm$2.class
 Entities\NhanVien.class
 Views\QuanLyHoaDonForm$4.class
 Entities\HoaDon.class
+Views\QuanLyHoaDonForm$18.class
 Views\QuanLyNhanVienForm$7.class
 Views\QuanLyXeForm$2.class
 Views\TrangChuForm$7.class
@@ -81,3 +82,4 @@ Views\DangKiForm$4.class
 Views\TrangChuForm$8.class
 Views\QuanLyXeForm$6.class
 Views\QuanLyNhanVienForm$8.class
+Views\QuanLyHoaDonForm$17.class

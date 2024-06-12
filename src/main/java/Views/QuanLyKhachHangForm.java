@@ -21,7 +21,8 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
 
     KhachHangModel khachHangModel = KhachHangModel.getInstance();
 
-    public DefaultTableModel model; 
+    public DefaultTableModel model;
+
     public QuanLyKhachHangForm() {
         try {
             initComponents();
@@ -39,23 +40,21 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
         }
     }
 
-
     public final void initTable(DefaultTableModel model) {
-        
-        model.setColumnIdentifiers(new String[] { "Mã Khách hàng", "Tên Khách hàng", "Số điện thoại", "Hà Nội",
-                "Giới tính", "Loại khách hàng" });
+        model.setColumnIdentifiers(new String[]{"Mã Khách hàng", "Tên Khách hàng", "Số điện thoại", "Hà Nội",
+            "Giới tính", "Loại khách hàng"});
         tblCustomers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         tblCustomers.setRowSorter(sorter);
-        loadTable(khachHangModel.getKhachHangs(),model);
+        loadTable(khachHangModel.getKhachHangs(), model);
     }
 
     public void loadTable(Set<KhachHang> khachHangs, DefaultTableModel model) {
 
         model.setNumRows(0);
         for (KhachHang kh : khachHangs) {
-            model.addRow(new Object[] { kh.getMaKhachHang(), kh.getTenKhachHang(), kh.getSoDienThoai(), kh.getDiaChi(),
-                    kh.isGioiTinh() ? "Nam" : "Nữ", kh.getLoaiKhachHang().getDisplayName() });
+            model.addRow(new Object[]{kh.getId(), kh.getTen(), kh.getSoDienThoai(), kh.getDiaChi(),
+                kh.getGioiTinh(), kh.getLoaiKhachHang().getDisplayName()});
         }
     }
 
@@ -80,12 +79,12 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
             String customerId = (String) tblCustomers.getValueAt(selectedRow, 0);
             KhachHang selectedCustomer = khachHangModel.getCustomerById(customerId);
 
-            this.txtId.setText(selectedCustomer.getMaKhachHang());
-            this.txtName.setText(selectedCustomer.getTenKhachHang());
+            this.txtId.setText(selectedCustomer.getId());
+            this.txtName.setText(selectedCustomer.getTen());
             this.txtAddress.setText(selectedCustomer.getDiaChi());
             this.txtPhone.setText(selectedCustomer.getSoDienThoai());
-            this.radioMale.setSelected(selectedCustomer.isGioiTinh());
-            this.radioFemale.setSelected(!selectedCustomer.isGioiTinh());
+            this.radioMale.setSelected(selectedCustomer.getGioiTinh().equalsIgnoreCase("Nam"));
+            this.radioFemale.setSelected(selectedCustomer.getGioiTinh().equalsIgnoreCase("Nữ"));
             this.typeCustomer.setSelectedItem(selectedCustomer.getLoaiKhachHang().getDisplayName());
         }
     }
@@ -475,7 +474,7 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
         String name = this.txtName.getText();
         String phone = this.txtPhone.getText();
         String address = this.txtAddress.getText();
-        boolean sex = this.radioMale.isSelected();
+        String sex = this.radioMale.isSelected() ? "Nam" : "Nữ";
         String selectedDisplayName = (String) this.typeCustomer.getSelectedItem();
         LoaiKhachHang selectedType = LoaiKhachHang.fromDisplayName(selectedDisplayName);
         if (id.trim().isEmpty() || name.trim().isEmpty() || phone.trim().isEmpty() || address.trim().isEmpty()) {
@@ -489,12 +488,12 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
         }
         try {
 
-            KhachHang newCustomer = new KhachHang(id, name, phone, address, sex, selectedType);
+            KhachHang newCustomer = new KhachHang(selectedType, id, name, phone, address, sex);
             if (khachHangModel.isCustomerExist(newCustomer)) {
                 JOptionPane.showMessageDialog(this, "Khách hàng đã tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
             } else {
                 khachHangModel.addCustomer(newCustomer);
-                loadTable(khachHangModel.getKhachHangs(),model);
+                loadTable(khachHangModel.getKhachHangs(), model);
                 refresh();
             }
         } catch (Exception ex) {
@@ -524,7 +523,7 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
         String name = this.txtName.getText();
         String phone = this.txtPhone.getText();
         String address = this.txtAddress.getText();
-        boolean sex = this.radioMale.isSelected();
+        String sex = this.radioMale.isSelected() ? "Nam" : "Nữ";
         String selectedDisplayName = (String) this.typeCustomer.getSelectedItem();
         LoaiKhachHang selectedType = LoaiKhachHang.fromDisplayName(selectedDisplayName);
         if (id.trim().isEmpty() || name.trim().isEmpty() || phone.trim().isEmpty() || address.trim().isEmpty()) {
@@ -537,12 +536,12 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
             return;
         }
         try {
-            KhachHang customer = new KhachHang(id, name, phone, address, sex, selectedType);
+            KhachHang customer = new KhachHang(selectedType, id, name, phone, address, sex);
             int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn sửa thông tin khách hàng này?",
                     "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 khachHangModel.updateCustomer(customer);
-                loadTable(khachHangModel.getKhachHangs(),model);
+                loadTable(khachHangModel.getKhachHangs(), model);
                 refresh();
                 JOptionPane.showMessageDialog(this, "Thông tin khách hàng đã được sửa.", "Thông báo",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -570,7 +569,7 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
 
                 khachHangModel.removeCustomerByIndex(customerId);
 
-                loadTable(khachHangModel.getKhachHangs(),model);
+                loadTable(khachHangModel.getKhachHangs(), model);
                 refresh();
                 JOptionPane.showMessageDialog(this, "Khách hàng đã được xóa.", "Thông báo",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -587,7 +586,7 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
         try {
             String keyword = txtSearch.getText();
             Set<KhachHang> filteredCustomers = khachHangModel.searchCustomers(keyword);
-            loadTable(filteredCustomers,model);
+            loadTable(filteredCustomers, model);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     "Tìm kiếm khách hàng bị lỗi, chi tiết: " + ex.getMessage() + "\n" + ex.toString() + "\n",

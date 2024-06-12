@@ -11,66 +11,56 @@ import java.util.Objects;
  *
  * @author admin
  */
-public class KhachHang implements Serializable {
-    private String maKhachHang;
-    private String tenKhachHang;
-    private String soDienThoai;
-    private String diaChi;
-    private boolean gioiTinh;
+public class KhachHang extends Person implements Serializable {
     private LoaiKhachHang loaiKhachHang;
 
-    public KhachHang(String maKhachHang, String tenKhachHang, String soDienThoai, String diaChi, boolean gioiTinh,
-            LoaiKhachHang loaiKhachHang) {
-        this.maKhachHang = maKhachHang;
-        this.tenKhachHang = tenKhachHang;
-        this.soDienThoai = soDienThoai;
-        this.diaChi = diaChi;
-        this.gioiTinh = gioiTinh;
+    public KhachHang(LoaiKhachHang loaiKhachHang, String id, String ten, String soDienThoai, String diaChi, String gioiTinh) {
+        super(id, ten, soDienThoai, diaChi, gioiTinh);
         this.loaiKhachHang = loaiKhachHang;
     }
 
-    public String getMaKhachHang() {
-        return maKhachHang;
+    public String getId() {
+        return id;
     }
 
-    public String getTenKhachHang() {
-        return tenKhachHang;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public String getSoDienThoai() {
         return soDienThoai;
     }
 
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public boolean isGioiTinh() {
-        return gioiTinh;
-    }
-
-    public LoaiKhachHang getLoaiKhachHang() {
-        return loaiKhachHang;
-    }
-
-    public void setMaKhachHang(String maKhachHang) {
-        this.maKhachHang = maKhachHang;
-    }
-
-    public void setTenKhachHang(String tenKhachHang) {
-        this.tenKhachHang = tenKhachHang;
-    }
-
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
     }
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public LoaiKhachHang getLoaiKhachHang() {
+        return loaiKhachHang;
     }
 
     public void setLoaiKhachHang(LoaiKhachHang loaiKhachHang) {
@@ -79,7 +69,7 @@ public class KhachHang implements Serializable {
 
     @Override
     public int hashCode() {
-        return this.maKhachHang.hashCode();
+        return this.id.hashCode();
     }
 
     @Override
@@ -94,7 +84,7 @@ public class KhachHang implements Serializable {
             return false;
         }
         final KhachHang other = (KhachHang) obj;
-        return Objects.equals(this.maKhachHang, other.maKhachHang);
+        return Objects.equals(this.id, other.id);
     }
 
 }
