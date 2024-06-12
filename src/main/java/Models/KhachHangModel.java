@@ -46,7 +46,7 @@ public class KhachHangModel {
     }
 
     public boolean isCustomerExist(KhachHang customer) {
-        return khachHangs.stream().anyMatch(c -> c.getMaKhachHang().equals(customer.getMaKhachHang()));
+        return khachHangs.stream().anyMatch(c -> c.getId().equals(customer.getId()));
     }
 
     public void addCustomer(KhachHang newCustomer) {
@@ -55,22 +55,22 @@ public class KhachHangModel {
 
     public KhachHang getCustomerById(String id) {
         return khachHangs.stream()
-                .filter(c -> c.getMaKhachHang().equals(id))
+                .filter(c -> c.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
     public void removeCustomerByIndex(String customerId) {
-        khachHangs.removeIf(c -> c.getMaKhachHang().equals(customerId));
+        khachHangs.removeIf(c -> c.getId().equals(customerId));
     }
 
     public void updateCustomer(KhachHang updatedCustomer) {
         Optional<KhachHang> customerOtp = khachHangs.stream()
-                .filter(c -> c.getMaKhachHang().equals(updatedCustomer.getMaKhachHang())).findFirst();
+                .filter(c -> c.getId().equals(updatedCustomer.getId())).findFirst();
         customerOtp.ifPresent(customer -> {
-            customer.setTenKhachHang(updatedCustomer.getTenKhachHang());
+            customer.setTen(updatedCustomer.getTen());
             customer.setSoDienThoai(updatedCustomer.getSoDienThoai());
-            customer.setGioiTinh(updatedCustomer.isGioiTinh());
+            customer.setGioiTinh(updatedCustomer.getGioiTinh());
             customer.setDiaChi(updatedCustomer.getDiaChi());
             customer.setLoaiKhachHang(updatedCustomer.getLoaiKhachHang());
         });
@@ -78,10 +78,10 @@ public class KhachHangModel {
 
     public Set<KhachHang> searchCustomers(String keyword) {
         return (Set<KhachHang>) khachHangs.stream()
-                .filter(c -> c.getTenKhachHang().toLowerCase().contains(keyword.toLowerCase())
+                .filter(c -> c.getTen().toLowerCase().contains(keyword.toLowerCase())
                         || c.getDiaChi().toLowerCase().contains(keyword.toLowerCase())
                         || c.getSoDienThoai().contains(keyword)
-                        || c.getMaKhachHang().contains(keyword))
+                        || c.getId().contains(keyword))
                 .collect(Collectors.toSet());
     }
 
