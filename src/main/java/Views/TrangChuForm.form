@@ -332,7 +332,7 @@
         <Component class="javax.swing.JLabel" name="lblLogo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/files/logo.jpg"/>
+              <Image iconType="2" name="G:\Documents\NetBeansProjects\Project_BTL-Java\Auto88Project\src\main\java\files\logo.jpg"/>
             </Property>
           </Properties>
           <Events>

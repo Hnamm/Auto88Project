@@ -24,6 +24,7 @@ public class TrangChuForm extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Trang chủ");
         this.setLocationRelativeTo(null);
+        hienThiDanhSachXe();
     }
 
     /**
@@ -190,7 +191,7 @@ public class TrangChuForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setText("Xem Nhanh:");
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/logo.jpg"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon("G:\\Documents\\NetBeansProjects\\Project_BTL-Java\\Auto88Project\\src\\main\\java\\files\\logo.jpg")); // NOI18N
         lblLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblLogoMouseClicked(evt);
@@ -292,37 +293,45 @@ public class TrangChuForm extends javax.swing.JFrame {
 
     private void btnDanhSachNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachNhanVienActionPerformed
         // TODO add your handling code here:
-        DanhSachlbl.setText("Danh Sách Nhân Viên");
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-        model.setColumnIdentifiers(new String[]{"Mã nhân viên", "Tên nhân viên", "Số điện thoại", "Địa chỉ", "Giới tính", "Chức vụ",
-                        "Ca làm việc", "Lương ", "Thưởng"});
-        QuanLyNhanVienForm form = new QuanLyNhanVienForm();
-        form.hienThiDanhSach(model);
+        hienThiNhanVien();
     }//GEN-LAST:event_btnDanhSachNhanVienActionPerformed
 
     private void btnDanhSachKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachKhachHangActionPerformed
         // TODO add your handling code here:
-        DanhSachlbl.setText("Danh Sách Khách Hàng");
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-        QuanLyKhachHangForm form = new QuanLyKhachHangForm();
-        form.initTable(model);
+        hienThiKhachHang();
     }//GEN-LAST:event_btnDanhSachKhachHangActionPerformed
 
     private void btnDanhSachXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachXeActionPerformed
         // TODO add your handling code here:
-        DanhSachlbl.setText("Danh Sách Xe");
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
-        model.setColumnIdentifiers(new String[]{"Mã Xe", "Tên Xe", "Hãng Sản Xuất", "Giá Bán (VND)", "Ngày Sản Xuất", "Màu Sắc", "Loại Xe",
-                        "Số Ghế"});
-        QuanLyXeForm form = new QuanLyXeForm();
-        form.hienThiDanhSach(model);
+        hienThiDanhSachXe();
     }//GEN-LAST:event_btnDanhSachXeActionPerformed
 
     private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
         // TODO add your handling code here:
         
     }//GEN-LAST:event_lblLogoMouseClicked
-
+    private void hienThiKhachHang() {
+        DanhSachlbl.setText("Danh Sách Khách Hàng");
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        QuanLyKhachHangForm form = new QuanLyKhachHangForm();
+        form.initTable(model);
+    }
+    private void hienThiNhanVien() {
+        DanhSachlbl.setText("Danh Sách Nhân Viên");
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setColumnIdentifiers(new String[]{"Mã nhân viên", "Tên nhân viên", "Số điện thoại", "Địa chỉ", "Giới tính", "Chức vụ",
+                        "Ca làm việc", "Lương ", "Thưởng"});
+        QuanLyNhanVienForm form = new QuanLyNhanVienForm();
+        form.hienThiDanhSach(model);
+    }
+    private void hienThiDanhSachXe() {
+        DanhSachlbl.setText("Danh Sách Xe");
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setColumnIdentifiers(new String[]{"Mã Xe", "Tên Xe", "Hãng Sản Xuất", "Giá Bán (VND)", "Ngày Sản Xuất", "Màu Sắc", "Loại Xe",
+                        "Số Ghế"});
+        QuanLyXeForm form = new QuanLyXeForm();
+        form.hienThiDanhSach(model);
+    }
     private void btnQuanLyXeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnQuanLyXeActionPerformed
         // TODO add your handling code here:
         QuanLyXeForm quanLyXeForm = new QuanLyXeForm();

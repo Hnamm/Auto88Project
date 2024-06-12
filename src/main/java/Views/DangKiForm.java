@@ -254,7 +254,7 @@ public class DangKiForm extends javax.swing.JFrame {
             }
             if (!checkRegex(passwordString)) {
                 JOptionPane.showMessageDialog(this,
-                        "Mật khẩu phải có tối thiểu sáu ký tự, ít nhất một chữ cái và một số");
+                        "Mật khẩu phải có tối thiểu sáu ký tự, ít nhất một chữ cái, một số và không chứa kí tự đặc biệt");
                 txtMatKhau.setText("");
                 txtXacNhanMatKhau.setText("");
                 txtMatKhau.requestFocus();
@@ -273,10 +273,10 @@ public class DangKiForm extends javax.swing.JFrame {
             }
             dstk.add(taiKhoanMoi);
             JOptionPane.showMessageDialog(this, "Đăng ký thành công");
-            txtTenTaiKhoan.setText("");
-            txtMatKhau.setText("");
-            txtXacNhanMatKhau.setText("");
             TaiKhoanModel.writeToFile(dstk);
+            DangNhapForm form = new DangNhapForm();
+            this.dispose();
+            form.setVisible(true);
 
         } catch (IOException ex) {
             Logger.getLogger(DangKiForm.class.getName()).log(Level.SEVERE, null, ex);
