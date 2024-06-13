@@ -59,8 +59,8 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
         list = hdm.getDshd();
         dsxe = docfile2("src/main/java/Files/Xe.txt");
         khm = new KhachHangModel();
-        dskh = khm.readDateFromFile("src/main/java/files/KhachHang.txt");
-        dsnv = docfile("src/main/java/files/NhanVien.txt");
+        dskh = khm.readDateFromFile("src/main/java/Files/KhachHang.txt");
+        dsnv = docfile("src/main/java/Files/NhanVien.txt");
         tb_model = (DefaultTableModel) tb_hoaDon.getModel();
         hienthidsfake();
     }
@@ -156,6 +156,14 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     public boolean kiemTraNhanVien(String maNV) {
         for (NhanVien nv : dsnv) {
             if (nv.getId().equals(maNV)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean kiemTraKhachHang(String maKH) {
+        for (KhachHang kh : dskh) {
+            if (kh.getId().equals(maKH)) {
                 return true;
             }
         }
@@ -391,11 +399,12 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_maXe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(txt_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_maXe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -701,7 +710,12 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             return;
         }
         if (!kiemTraNhanVien(maNV)) {
-            JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+            JOptionPane.showMessageDialog(null, "Mã nhân viên phải tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!kiemTraKhachHang(maKhachHang)) {
+            JOptionPane.showMessageDialog(null, "Mã khách hàng phải tồn tại", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -790,6 +804,11 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
                         JOptionPane.WARNING_MESSAGE);
                 return;
+            }
+            if (!kiemTraKhachHang(maKhachHang)) {
+            JOptionPane.showMessageDialog(null, "Mã khách hàng phải tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
             }
             // Kiểm tra số lượng và đơn giá phải là số nguyên và không nhỏ hơn 0
             int soLuong;
