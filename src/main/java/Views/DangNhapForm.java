@@ -25,6 +25,7 @@ public class DangNhapForm extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Đăng Nhập Form");
         this.setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btnDangNhap);
         this.setVisible(true);
     }
 
@@ -63,18 +64,6 @@ public class DangNhapForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Mật Khẩu:");
 
-        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenDangNhapActionPerformed(evt);
-            }
-        });
-
-        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMatKhauActionPerformed(evt);
-            }
-        });
-
         btnDangNhap.setBackground(new java.awt.Color(153, 204, 255));
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnDangNhap.setText("Đăng Nhập");
@@ -95,7 +84,7 @@ public class DangNhapForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("G:\\Documents\\NetBeansProjects\\Project_BTL-Java\\Auto88Project\\src\\main\\java\\files\\logo.jpg")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/logo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,11 +143,6 @@ public class DangNhapForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtMatKhauActionPerformed
-        // TODO add your handling code here:
-        btnDangNhapActionPerformed(evt);
-    }// GEN-LAST:event_txtMatKhauActionPerformed
-
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here:
         DangKiForm dangKiForm = new DangKiForm();
@@ -200,12 +184,6 @@ public class DangNhapForm extends javax.swing.JFrame {
             Logger.getLogger(DangNhapForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }// GEN-LAST:event_btnDangNhapActionPerformed
-
-    private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtTenDangNhapActionPerformed
-        // TODO add your handling code here:
-        btnDangNhapActionPerformed(evt);
-    }// GEN-LAST:event_txtTenDangNhapActionPerformed
-
     /**
      * @param args the command line arguments
      */
