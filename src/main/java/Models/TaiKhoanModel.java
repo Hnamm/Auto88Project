@@ -37,17 +37,16 @@ public class TaiKhoanModel implements Serializable{
     public void addTaiKhoan(TaiKhoan taiKhoanMoi) {
         taiKhoanSet.add(taiKhoanMoi);
     }
-    public static void writeToFile(HashSet<TaiKhoan> taiKhoanSet) throws FileNotFoundException, IOException {
+    public static void writeToFile(HashSet<TaiKhoan> taiKhoanSet) throws FileNotFoundException, 
+            IOException {
         FileOutputStream fos = new FileOutputStream(filePath); 
-        ObjectOutputStream objOutputStream = new ObjectOutputStream(fos);
-            
+        ObjectOutputStream objOutputStream = new ObjectOutputStream(fos);   
         objOutputStream.writeObject(taiKhoanSet);
-
-        objOutputStream.flush();
-        
+        objOutputStream.flush();  
     }
     
-    public static HashSet<TaiKhoan> readFromFile () throws FileNotFoundException, IOException, ClassNotFoundException, EOFException {
+    public static HashSet<TaiKhoan> readFromFile () throws FileNotFoundException, IOException, 
+            ClassNotFoundException, EOFException {
         HashSet<TaiKhoan> data = new HashSet<>();
         FileInputStream fis = new FileInputStream(filePath);
         try {

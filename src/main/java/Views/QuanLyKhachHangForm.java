@@ -22,10 +22,11 @@ public class QuanLyKhachHangForm extends javax.swing.JFrame {
     KhachHangModel khachHangModel = KhachHangModel.getInstance();
 
     public DefaultTableModel model;
-
+    
     public QuanLyKhachHangForm() {
         try {
             initComponents();
+            this.radioMale.setSelected(true);
             model = (DefaultTableModel) tblCustomers.getModel();
             initTable(model);
             initSelect();

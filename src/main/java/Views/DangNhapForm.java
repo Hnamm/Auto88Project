@@ -22,11 +22,18 @@ public class DangNhapForm extends javax.swing.JFrame {
      * Creates new form DangNhapForm
      */
     public DangNhapForm() {
-        initComponents();
-        this.setTitle("Đăng Nhập Form");
-        this.setLocationRelativeTo(null);
-        getRootPane().setDefaultButton(btnDangNhap);
-        this.setVisible(true);
+        try {
+            initComponents();
+            this.setTitle("Đăng Nhập Form");
+            this.setLocationRelativeTo(null);
+            getRootPane().setDefaultButton(btnDangNhap);
+            this.setVisible(true);
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Có lỗi trong quá trình khởi tạo trang đăng nhập: " + ex.getMessage() + "\n" + ex.toString() + 
+                            "\n", "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -150,14 +157,12 @@ public class DangNhapForm extends javax.swing.JFrame {
         dangKiForm.setVisible(true);
     }// GEN-LAST:event_btnDangKyActionPerformed
 
-    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDangNhapActionPerformed
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            // TODO add your handling code here:
             HashSet<TaiKhoan> dstk = TaiKhoanModel.readFromFile();
             String username = txtTenDangNhap.getText().trim();
             char[] password = txtMatKhau.getPassword();
             String passwordString = (new String(password)).trim();
-
             if (username.equals("")) {
                 txtTenDangNhap.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống tên đăng nhập");
@@ -168,7 +173,6 @@ public class DangNhapForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống mật khẩu");
                 return;
             }
-
             TaiKhoan taiKhoanMoi = new TaiKhoan(username, passwordString);
             if (dstk.contains(taiKhoanMoi)) {
                 TrangChuForm form = new TrangChuForm();
@@ -181,9 +185,13 @@ public class DangNhapForm extends javax.swing.JFrame {
                 txtTenDangNhap.requestFocus();
             }
         } catch (IOException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Có lỗi trong quá trình đăng nhập: " + ex.getMessage() + "\n" + ex.toString() + 
+                            "\n", "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(DangNhapForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }// GEN-LAST:event_btnDangNhapActionPerformed
+    }
     /**
      * @param args the command line arguments
      */

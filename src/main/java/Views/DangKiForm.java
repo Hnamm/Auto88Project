@@ -27,11 +27,18 @@ public class DangKiForm extends javax.swing.JFrame {
      * Creates new form DangKiForm
      */
     public DangKiForm() {
-        initComponents();
-        this.setTitle("Đăng ký Form");
-        getRootPane().setDefaultButton(btnDangKy);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        try {
+            initComponents();
+            this.setTitle("Đăng ký Form");
+            getRootPane().setDefaultButton(btnDangKy);
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Có lỗi trong quá trình khởi tạo trang đăng ký: " + ex.getMessage() + "\n" + ex.toString() + 
+                            "\n", "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -169,14 +176,12 @@ public class DangKiForm extends javax.swing.JFrame {
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDangKyActionPerformed
         try {
-            // TODO add your handling code here:
             HashSet<TaiKhoan> dstk = TaiKhoanModel.readFromFile();
             String username = txtTenTaiKhoan.getText().trim();
             char[] password = txtMatKhau.getPassword();
             String passwordString = (new String(password)).trim();
             char[] xacNhanPassword = txtXacNhanMatKhau.getPassword();
             String xacNhanPasswordString = (new String(xacNhanPassword)).trim();
-
             if (username.equals("")) {
                 txtTenTaiKhoan.requestFocus();
                 JOptionPane.showMessageDialog(this, "Không được bỏ trống tên tài khoản");
@@ -200,7 +205,8 @@ public class DangKiForm extends javax.swing.JFrame {
             }
             if (!checkRegex(passwordString)) {
                 JOptionPane.showMessageDialog(this,
-                        "Mật khẩu phải có tối thiểu sáu ký tự, ít nhất một chữ cái, một số và không chứa kí tự đặc biệt");
+                        "Mật khẩu phải có tối thiểu sáu ký tự, ít nhất một chữ cái,"
+                                + " một số và không chứa kí tự đặc biệt");
                 txtMatKhau.setText("");
                 txtXacNhanMatKhau.setText("");
                 txtMatKhau.requestFocus();
@@ -223,7 +229,6 @@ public class DangKiForm extends javax.swing.JFrame {
             DangNhapForm form = new DangNhapForm();
             this.dispose();
             form.setVisible(true);
-
         } catch (IOException ex) {
             Logger.getLogger(DangKiForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

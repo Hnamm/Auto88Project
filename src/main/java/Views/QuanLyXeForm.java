@@ -658,6 +658,7 @@ public class QuanLyXeForm extends javax.swing.JFrame {
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_resetButtonActionPerformed
         tenXeTextField.setText("");
         maXeTextField.setText("");
+        maXeTextField.setEnabled(true);
         hangSanXuatTextField.setText("");
         giaBanTextField.setText("");
         ngaySanXuatTextField.setText("");

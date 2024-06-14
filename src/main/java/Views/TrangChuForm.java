@@ -20,10 +20,17 @@ public class TrangChuForm extends javax.swing.JFrame {
          * Creates new form TrangChuForm
          */
         public TrangChuForm() {
-                initComponents();
-                this.setTitle("Trang chủ");
-                this.setLocationRelativeTo(null);
-                hienThiDanhSachXe();
+                try {
+                    initComponents();
+                    this.setTitle("Trang chủ");
+                    this.setLocationRelativeTo(null);
+                    hienThiDanhSachXe();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this,
+                    "Có lỗi trong quá trình khởi tạo trang chủ: " + ex.getMessage() + "\n" + ex.toString() + 
+                            "\n", "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+                }
         }
 
         /**
@@ -294,7 +301,7 @@ public class TrangChuForm extends javax.swing.JFrame {
 
         private void btnDanhSachNhanVienActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDanhSachNhanVienActionPerformed
                 // TODO add your handling code here:
-                hienThiNhanVien();
+                    hienThiNhanVien();
         }// GEN-LAST:event_btnDanhSachNhanVienActionPerformed
 
         private void btnDanhSachKhachHangActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDanhSachKhachHangActionPerformed
