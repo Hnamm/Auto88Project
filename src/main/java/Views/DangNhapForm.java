@@ -159,7 +159,8 @@ public class DangNhapForm extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            HashSet<TaiKhoan> dstk = TaiKhoanModel.readFromFile();
+            TaiKhoanModel taiKhoan = new TaiKhoanModel(TaiKhoanModel.readFromFile());
+            HashSet<TaiKhoan> dstk = taiKhoan.getTaiKhoanSet();
             String username = txtTenDangNhap.getText().trim();
             char[] password = txtMatKhau.getPassword();
             String passwordString = (new String(password)).trim();

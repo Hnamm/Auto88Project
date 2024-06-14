@@ -31,6 +31,10 @@ public class TaiKhoanModel implements Serializable{
         this.taiKhoanSet = taiKhoanSet;
     }
 
+    public HashSet<TaiKhoan> getTaiKhoanSet() {
+        return taiKhoanSet;
+    }
+
     public void setTaiKhoanSet(HashSet<TaiKhoan> taiKhoanSet) {
         this.taiKhoanSet = taiKhoanSet;
     }
