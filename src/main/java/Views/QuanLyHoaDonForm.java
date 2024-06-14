@@ -59,8 +59,8 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
         list = hdm.getDshd();
         dsxe = docfile2("src/main/java/Files/Xe.txt");
         khm = new KhachHangModel();
-        dskh = khm.readDateFromFile("src/main/java/files/KhachHang.txt");
-        dsnv = docfile("src/main/java/files/NhanVien.txt");
+        dskh = khm.readDateFromFile("src/main/java/Files/KhachHang.txt");
+        dsnv = docfile("src/main/java/Files/NhanVien.txt");
         tb_model = (DefaultTableModel) tb_hoaDon.getModel();
         hienthidsfake();
     }
@@ -156,6 +156,14 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     public boolean kiemTraNhanVien(String maNV) {
         for (NhanVien nv : dsnv) {
             if (nv.getId().equals(maNV)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean kiemTraKhachHang(String maKH) {
+        for (KhachHang kh : dskh) {
+            if (kh.getId().equals(maKH)) {
                 return true;
             }
         }
@@ -631,18 +639,23 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_timActionPerformed
 
     private void btn_giaGocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_giaGocActionPerformed
-        String maXe = txt_maXe.getText();
-        if (maXe.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (kiemTraXe(maXe)) {
-            for (Xe xe : dsxe) {
-                if (xe.getMaXe().equals(maXe)) {
-                    txt_donGia.setText("" + xe.getGiaBan());
+        try {
+            String maXe = txt_maXe.getText();
+            if (maXe.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (kiemTraXe(maXe)) {
+                for (Xe xe : dsxe) {
+                    if (xe.getMaXe().equals(maXe)) {
+                        txt_donGia.setText("" + xe.getGiaBan());
+                    }
                 }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra: " + e.getMessage(), "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_giaGocActionPerformed
 
@@ -679,6 +692,7 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     }// GEN-LAST:event_cb_ptttActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_suaActionPerformed
+    try{
         String maHoaDon = txt_maHoaDon.getText();
         String ngayLap = txt_ngayLap.getText();
         String maKhachHang = txt_maKhachHang.getText();
@@ -702,7 +716,12 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             return;
         }
         if (!kiemTraNhanVien(maNV)) {
-            JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+            JOptionPane.showMessageDialog(null, "Mã nhân viên phải tồn tại", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!kiemTraKhachHang(maKhachHang)) {
+            JOptionPane.showMessageDialog(null, "Mã khách hàng phải tồn tại", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -750,7 +769,11 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
         hdm.LuuFile(fileName, list); // Lưu danh sách vào file
         JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", "Thông báo",
                 JOptionPane.INFORMATION_MESSAGE);
-        resetForm(); // Reset form sau khi cập nhật thành công
+        resetForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra: " + e.getMessage(), "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+        } // Reset form sau khi cập nhật thành công
     }// GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_themActionPerformed
@@ -789,6 +812,11 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
             }
             if (!kiemTraNhanVien(maNV)) {
                 JOptionPane.showMessageDialog(null, "Ma nhân viên phải tồn tại", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!kiemTraKhachHang(maKhachHang)) {
+                JOptionPane.showMessageDialog(null, "Mã khách hàng phải tồn tại", "Thông báo",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -840,21 +868,26 @@ public class QuanLyHoaDonForm extends javax.swing.JFrame {
     }// GEN-LAST:event_btn_themActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btn_xoaActionPerformed
-        String maHoaDon = txt_maHoaDon.getText();
-        if (maHoaDon.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Bạn phải nhập mã hóa đơn", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        HoaDon ktHoaDon = kiemtratontai(maHoaDon);
-        if (ktHoaDon == null) {
-            JOptionPane.showMessageDialog(rootPane, "Hóa đơn không tồn tại", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        } else {
-            hdm.remove(maHoaDon);
-            hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
-            hdm.LuuFile(fileName, list);
+        try {
+            String maHoaDon = txt_maHoaDon.getText();
+            if (maHoaDon.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Bạn phải nhập mã hóa đơn", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            HoaDon ktHoaDon = kiemtratontai(maHoaDon);
+            if (ktHoaDon == null) {
+                JOptionPane.showMessageDialog(rootPane, "Hóa đơn không tồn tại", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            } else {
+                hdm.remove(maHoaDon);
+                hienthidsfake(); // Hàm này có thể là cập nhật bảng hoặc giao diện khác
+                hdm.LuuFile(fileName, list);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra: " + e.getMessage(), "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_btn_xoaActionPerformed
 
